@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print
+// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers
 
 import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +29,12 @@ bool check2 = false;
 bool check3 = false;
 String? radio ;
 bool notify = false;
+
 @override
 Widget build(BuildContext context) {
 	return Scaffold(
-  appBar: AppBar(
+    
+    appBar: AppBar(
         
       backgroundColor: kPrimaryColor,
       elevation: 0,
@@ -54,167 +56,231 @@ Widget build(BuildContext context) {
       ),
 
     ),
-	body:  Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30 ,  horizontal: 10),
-      child: Row(
+	  body:  SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Padding(
+       padding: const EdgeInsets.symmetric(vertical: 30 ,  horizontal: 10),
+       child:
+        Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-
+  
 //dropDownMenu Buttons           
-            Container(
-              color: Color.fromARGB(255, 213, 212, 212),
-              child: DropdownButton(
-                      // Down Arrow Icon
-                      icon: const Icon(
-                        Icons.hive_rounded,
-                        color: Colors.yellow,
-                        ),	
-                      
-                      // Array list of items
-                      items: items.map((String items) {
-              return DropdownMenuItem(        
-              value: items,
-              child: Text(items),            
-              );
-                      }).toList(),
-                       hint: Text("Choose an item",
-                       textAlign: TextAlign.center,
-                     style: GoogleFonts.robotoCondensed(
-                  fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-                ),),
-                       value: dropdownvalue,
-                      onChanged: (String? newValue) { setState(() { dropdownvalue = newValue ?? "";
-              });
-                      },
-                      focusColor: Colors.red,
-                      dropdownColor: Color.fromARGB(255, 241, 236, 236),
-            style: GoogleFonts.robotoCondensed(
-              fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-                )),
-            ),
-
-
-            SizedBox(height: 40,),
-
+          Container(
+            color: Color.fromARGB(255, 213, 212, 212),
+            child: DropdownButton(
+                    // Down Arrow Icon
+                    icon: const Icon(
+                      Icons.hive_rounded,
+                      color: Colors.yellow,
+                      ),	
+                    
+                    // Array list of items
+                    items: items.map((String items) {
+            return DropdownMenuItem(        
+            value: items,
+            child: Text(items),            
+            );
+                    }).toList(),
+                     hint: Text("Choose an item",
+                     textAlign: TextAlign.center,
+                   style: GoogleFonts.robotoCondensed(
+                fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
+              ),),
+                     value: dropdownvalue,
+                    onChanged: (String? newValue) { setState(() { dropdownvalue = newValue ?? "";
+            });
+                    },
+                    focusColor: Colors.red,
+                    dropdownColor: Color.fromARGB(255, 241, 236, 236),
+          style: GoogleFonts.robotoCondensed(
+            fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
+              )),
+          ),         
+          SizedBox(height: 40,),
+  
 //checkbox buttons 
-
-
-            Text("choose item",
-              style: GoogleFonts.robotoCondensed(
-                            fontSize: 30,fontWeight: FontWeight.w100, color: Colors.black,
-                          )),
-            Row(
-                    children: [
-                      Text("item1",
-                            style: GoogleFonts.robotoCondensed(
-                            fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-                          )),
-                      Checkbox(value: check1, onChanged: (val){
-                      setState(() {
-                        check1 = val! ;
-                      });
-                      },),
-                    ],
-                  ),
-            Row(
-                    children: [
-                      Text("item2",
-                            style: GoogleFonts.robotoCondensed(
-                            fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-                          )),
-                      Checkbox(value: check2, onChanged: (val){
-                      setState(() {
-                        check2 = val! ;
-                      });
-                      },),
-                    ],
-                  ),
-            Row(
-                    children: [
-                      Text("item3",
-                            style: GoogleFonts.robotoCondensed(
-                            fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-                          )),
-                      Checkbox(value: check3, onChanged: (val){
-                      setState(() {
-                        check3 = val! ;
-                      });
-                      },),
-                    ],
-                  ), 
-            
-            SizedBox(height: 20,),
-
-
-//radio buttons
-
-            Column( 
-             children: [
-              Text('choose  item',
-               style: GoogleFonts.robotoCondensed(
-                            fontSize: 30,fontWeight: FontWeight.w100, color: Colors.black,
-                          )),
-            Column(
-              children: [                
-                Row(
-                  children: [
-                    Text("radio1"),
-                    Radio( activeColor: Colors.green, value: "check1", groupValue: radio, onChanged: (check1){
-                      setState(() {
-                        radio=check1;
-                      });
-                    }),
-                  ],
-                ),               
-                Row(
-                  children: [
-                    Text("radio2"),
-                    Radio(value: "check2", groupValue: radio, onChanged: (check2){
-                      setState(() {
-                        radio=check2;
-                      });
-                    }),
-                  ],
-                ),               
-                Row(
-                  children: [
-                    Text("radio3"),
-                    Radio(value: "check3", groupValue: radio, onChanged: (check3){
-                      setState(() {
-                        radio=check3;
-                      });
-                    }),
-                  ],
-                ),             ],
-            ),  
-          ],
-        ),   
-// switch buttons   
-            SizedBox(height: 20,),
-
-            Text(" notifications",
+  
+          Column(
+            children:[
+                Text("choose item",
                   style: GoogleFonts.robotoCondensed(
-                  fontSize: 30,fontWeight: FontWeight.w100, color: Colors.black,
-                          )),
-            Switch(value: notify, onChanged: (val){
-              setState(() {
-                notify = val ;
+                                fontSize: 30,fontWeight: FontWeight.w100, color: Colors.black,
+                              )),
+                        Row(
+                          children: [
+                            Text("item1",
+                                  style: GoogleFonts.robotoCondensed(
+                                  fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
+                                )),
+                            Checkbox(value: check1, onChanged: (val){
+                            setState(() {
+                              check1 = val! ;
+                            });
+                            },),
+                          ],
+                        ),
+         
+           Row(
+                  children: [
+                    Text("item2",
+                          style: GoogleFonts.robotoCondensed(
+                          fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
+                        )),
+                    Checkbox(value: check2, onChanged: (val){
+                    setState(() {
+                      check2 = val! ;
+                    });
+                    },),
+                  ],
+                ),
+           Row(
+                  children: [
+                    Text("item3",
+                          style: GoogleFonts.robotoCondensed(
+                          fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
+                        )),
+                    Checkbox(value: check3, onChanged: (val){
+                    setState(() {
+                      check3 = val! ;
+                    });
+                    },),
+                  ],
+                ), 
+            ]
+          ),          
+          SizedBox(height: 20,),
+  
+//radio buttons
+          Column( 
+           children: [
+            Text('choose  item',
+             style: GoogleFonts.robotoCondensed(
+                          fontSize: 30,fontWeight: FontWeight.w100, color: Colors.black,
+                        )),
+          Column(
+            children: [                
+              Row(
+                children: [
+                  Text("radio1"),
+                  Radio( activeColor: Colors.green, value: "check1", groupValue: radio, onChanged: (check1){
+                    setState(() {
+                      radio=check1;
+                    });
+                  }),
+                ],
+              ),               
+              Row(
+                children: [
+                  Text("radio2"),
+                  Radio(value: "check2", groupValue: radio, onChanged: (check2){
+                    setState(() {
+                      radio=check2;
+                    });
+                  }),
+                ],
+              ),               
+              Row(
+                children: [
+                  Text("radio3"),
+                  Radio(value: "check3", groupValue: radio, onChanged: (check3){
+                    setState(() {
+                      radio=check3;
+                    });
+                  }),
+                ],
+              ),             ],
+          ),  
+        ],
+         ),   
+          SizedBox(height: 20,),
+// switch buttons   
+          
+  
+          Column(
+            children: [
+              Text(" notifications",
+                    style: GoogleFonts.robotoCondensed(
+                    fontSize: 30,fontWeight: FontWeight.w100, color: Colors.black,
+                            )),
+               Switch(value: notify, onChanged: (val){
+                  setState(() {
+                    notify = val ;
+                  });
+                }),
+            ],
+          ),
+          SizedBox(height: 20,),
+  
+// liste tile            
+           Container(
+             color:  Colors.red,
+            child: ListTile(title:  Text("iphone14"),)),
+           SizedBox(height: 20,),
+//snackbar
+
+           ElevatedButton(
+        onPressed: () {
+          final snackBar = SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: const Text('Yay! A SnackBar!'),
+            duration:Duration(seconds:2),
+            backgroundColor:  Colors.green,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.all(10),
+            action: SnackBarAction(
+              label: 'Undo', textColor: Colors.white,
+              onPressed: () {
+                print('undo');
+              },
+            ),
+          );
+          // Find the ScaffoldMessenger in the widget tree
+          // and use it to show a SnackBar.
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
+        child: const Text('Show SnackBar'),
+      ),
+           SizedBox(height: 20,), 
+//alertDialog   
+           ElevatedButton(onPressed: (){
+              showDialog(context: context, builder: (context){
+                return AlertDialog(
+                  actions: [
+                    TextButton(onPressed: (){
+                      Navigator.of(context).pop();
+                    }, child: Text('OK')),
+
+                    TextButton(onPressed: (){
+                      Navigator.of(context).pop();
+                    }, child: Text('cancel')),
+                  ],
+
+                  titlePadding: EdgeInsets.only(top: 20,left: 20),
+                  contentPadding: EdgeInsets.all(20),
+                  contentTextStyle: TextStyle( fontWeight: FontWeight.bold,  color: Colors.blue),
+                  titleTextStyle: TextStyle( fontWeight: FontWeight.normal,  color: Colors.red),   
+                  title: Text("title"),
+                  content: Text("content content content"),
+                );
               });
-            }),
-// liste tile     
-            SizedBox(height: 20,),
-            Container(
-              color:  Colors.red,
-              child: ListTile(title:  Text("iphone14"),)),
-    
-    
-     ] ), ],
-),
-       
-              
+            },
+             child: Text("show alert")),
+           
+//listeview builder    
+//exemple shop screen
+
+
       
+      
+      
+      
+      
+      ] ),
+        
+               
+       
+     ),
     ),
     
 	);
