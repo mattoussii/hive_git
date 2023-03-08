@@ -48,6 +48,7 @@ class _HomeState extends State<Home> {
           Icons.arrow_back,
           color: Colors.white,
           ),
+        
         onPressed: (){
             Navigator.push( context,MaterialPageRoute(builder: (context) => HomeScreen() ), ); 
 },
@@ -57,12 +58,14 @@ class _HomeState extends State<Home> {
           backgroundColor: kPrimaryColor,
           bottom: const TabBar(
             tabs: [
+              
               Tab(
                 icon: Icon(
                   Icons.qr_code,
                   size: 40,
                   
                 ),
+                child: Text('create'),
               ),
               Tab(
                 icon: Icon(
@@ -70,6 +73,7 @@ class _HomeState extends State<Home> {
                   size: 40,
                   
                 ),
+                child: Text('scanne'),
               ),
             ],
           ),

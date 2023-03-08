@@ -46,12 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
      Scaffold(
       appBar: HomeAppBar(),
       backgroundColor: Colors.transparent,
-
+      drawerScrimColor: kPrimaryColor.withOpacity(0.3),
       drawer:Drawer(
+        
          child: ListView(
-    
+          
           padding: EdgeInsets.zero,
           children: [
+            
                     DrawerHeader(
                     decoration: BoxDecoration(
                       color: kPrimaryColor,
