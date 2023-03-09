@@ -1,8 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers
 
+import 'dart:ffi';
+
 import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/retry.dart';
 
 class visite extends StatefulWidget {
 const visite({Key? key}) : super(key: key);
@@ -24,12 +27,36 @@ var items = [
 	'Item 4',
 	'Item 5',
 ];
+// List of images
+List images = [
+  { 'url':'images/new/gallery.png'} ,
+  {'url':'images/new/help.png'} ,
+  { 'url':'images/new/history.png'} ,
+  {'url':'images/new/locate.png'} , 
+  {'url':'images/new/location.png'} ,
+  {'url':'images/new/love.png'} ,
+  {'url':'images/new/qr-code.png'} ,
+  {'url':'images/new/qr-scan.png'} ,
+  {'url':'images/new/qr.png'}, 
+  {'url':'images/new/seek.png'} ,
+  {'url':'images/new/shop.png'} ,
+  {'url':'images/new/trade.png'} ,
+  {'url':'images/new/where.png'} ,
+];
 bool check1 = false;
 bool check2 = false;
 bool check3 = false;
 String? radio ;
 bool notify = false;
 
+  PageController? pc;
+
+
+ @override
+  initState(){
+ pc = new PageController(initialPage: 1);
+ super.initState();
+}
 @override
 Widget build(BuildContext context) {
 	return Scaffold(
@@ -266,11 +293,112 @@ Widget build(BuildContext context) {
               });
             },
              child: Text("show alert")),
-           
+           SizedBox(height: 20,), 
 //listeview builder    
 //exemple shop screen
 
 
+//pageview builder           
+            Column(
+              children: [
+                SizedBox(
+                  height: 300,
+                  child: PageView.builder(
+                    controller:  pc ,
+                    itemCount: images.length,
+                    itemBuilder: (context, i){
+                      return Image.asset(images[i]['url'], fit: BoxFit.fill,);
+                    }
+
+                    
+
+                  ),
+                ),
+                ElevatedButton(onPressed: (){
+pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubicEmphasized);
+                }, child: Text('return to first page  '))
+              ],
+            ),
+            SizedBox(height: 20,), 
+//Text Field
+          Column(children: [
+            TextFormField(         
+               keyboardType: TextInputType.emailAddress,
+               maxLines: 1,
+              decoration: InputDecoration(
+                
+                enabled: true,
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                    width: 3 ,                   
+                  )
+                ),
+
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.indigo,
+                    width: 3 ,                   
+                  )
+                ),
+
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 3 ,                    
+                  )
+                ),
+
+                hintText: "type your message...",
+                hintStyle: TextStyle(color: Colors.blue),
+                prefixIcon: Icon(Icons.text_fields),
+                suffixIcon: Icon(Icons.send , color: Colors.blue,),
+                icon: Icon(Icons.messenger_outline_rounded),
+              ),
+            ),
+            SizedBox(height: 10,), 
+            TextFormField(         
+               keyboardType: TextInputType.emailAddress,
+               obscureText: true,
+               maxLines: 1,
+              decoration: InputDecoration(
+                
+                enabled: true,
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                    width: 3 ,                   
+                  )
+                ),
+
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.indigo,
+                    width: 3 ,                   
+                  )
+                ),
+
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 3 ,                    
+                  )
+                ),
+
+                hintText: "type your password...",
+                hintStyle: TextStyle(color: Colors.blue),
+                prefixIcon: Icon(Icons.text_fields),
+                suffixIcon: Icon(Icons.hive_rounded , color: Colors.blue,),
+                icon: Icon(Icons.password_rounded),
+              ),
+            )
+          ],)
       
       
       
