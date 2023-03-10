@@ -84,22 +84,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     fontSize: 40,fontWeight: FontWeight.bold, color: Colors.orange,
                   ),
                   ),
-          
-          
-          
-          
+                           
                   Text(
                     'welcome ! Here you can sign up ',
                      style: GoogleFonts.robotoCondensed(
                     fontSize: 18,fontWeight: FontWeight.bold, color: Colors.amber[800],
                   ),
                   ),
-          
-          
-          
+                       
                   SizedBox(height: 50,),
-          
-          
+                   
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Container(
@@ -107,75 +101,109 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:20 ),
-                        child: TextField(
-                          controller: _emailController,
-                          decoration: InputDecoration(
-                             border: InputBorder.none,
-                             hintText: 'Email',
-                             ),
-                        ),
+                      child: TextField(
+                        keyboardType: TextInputType.emailAddress,
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.email_rounded ,color: Colors.black,),
+                           border: InputBorder.none,
+                           hintText: 'Email',
+                           ),
                       ),
                     ),
                   ),
-          
-           
+                  
                   SizedBox(height: 10,),
-          
-          
-                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Container(
-                      decoration:BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:20 ),
-                        child: TextField(
-                          controller: _passwordController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                             border: InputBorder.none,
-                             hintText: 'password',
-                             ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-
-                    SizedBox(height: 10,),
-
-
-                     Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Container(
-                      decoration:BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:20 ),
-                        child: TextField(
-                          controller: _confirmpasswordController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                             border: InputBorder.none,
-                             hintText: 'confirm password',
-                             ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-
-                  SizedBox(height: 10,),
-          
-          
+                   
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration:BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.password_rounded ,color: Colors.black,),
+                           border: InputBorder.none,
+                           hintText: 'password',
+                           ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 10,),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration:BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        
+                        controller: _confirmpasswordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.password ,color: Colors.black,),
+                           border: InputBorder.none,
+                           hintText: 'confirm password',
+                           ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 10,),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration:BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        keyboardType: TextInputType.phone,
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.phone ,color: Colors.black,),
+                           border: InputBorder.none,
+                           hintText: 'phone number',
+                           ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 10,),
+                  
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration:BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.home ,color: Colors.black,),
+                           border: InputBorder.none,
+                           hintText: 'adress',
+                           ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 10,),
+          
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 85),
                     child: GestureDetector(
                       onTap: signUp ,
                       child: Container(
@@ -197,14 +225,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ),
-
-
-
-
-
-
+                
                   SizedBox(height: 10),
-          
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

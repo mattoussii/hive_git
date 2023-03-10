@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers
+// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers, avoid_types_as_parameter_names, unnecessary_string_interpolations, prefer_typing_uninitialized_variables
 
 
 
@@ -29,19 +29,19 @@ var items = [
 ];
 // List of images
 List images = [
-  { 'url':'images/new/gallery.png'} ,
-  {'url':'images/new/help.png'} ,
-  { 'url':'images/new/history.png'} ,
-  {'url':'images/new/locate.png'} , 
-  {'url':'images/new/location.png'} ,
-  {'url':'images/new/love.png'} ,
-  {'url':'images/new/qr-code.png'} ,
-  {'url':'images/new/qr-scan.png'} ,
-  {'url':'images/new/qr.png'}, 
-  {'url':'images/new/seek.png'} ,
-  {'url':'images/new/shop.png'} ,
-  {'url':'images/new/trade.png'} ,
-  {'url':'images/new/where.png'} ,
+  { 'url':'icons/gallery.png'} ,
+  {'url':'icons/help.png'} ,
+  { 'url':'icons/history.png'} ,
+  {'url':'icons/locate.png'} , 
+  {'url':'icons/location.png'} ,
+  {'url':'icons/love.png'} ,
+  {'url':'icons/qr-code.png'} ,
+  {'url':'icons/qr-scan.png'} ,
+  {'url':'icons/qr.png'}, 
+  {'url':'icons/seek.png'} ,
+  {'url':'icons/shop.png'} ,
+  {'url':'icons/trade.png'} ,
+  {'url':'icons/where.png'} ,
 ];
 bool check1 = false;
 bool check2 = false;
@@ -49,20 +49,32 @@ bool check3 = false;
 String? radio ;
 bool notify = false;
 
-  PageController? pc;
+PageController? pc;
 
+GlobalKey<FormState> formState = new GlobalKey<FormState>();
+
+
+
+
+var username ;
+var phone ;
 
  @override
-  initState(){
- pc = new PageController(initialPage: 1);
- super.initState();
+initState(){
+  pc = new PageController(initialPage: 10);
+  super.initState();
 }
+var _valslider = 10.0 ;
 @override
 Widget build(BuildContext context) {
 	return Scaffold(
-    
+    backgroundColor: Color.fromARGB(255, 214, 214, 222),
     appBar: AppBar(
-        
+      actions: [
+        IconButton(onPressed: (){
+          
+        }, icon: Icon(Icons.search_rounded))
+      ],  
       backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
@@ -320,7 +332,7 @@ pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubi
               ],
             ),
             SizedBox(height: 20,), 
-//Text Field
+//Text Field +form validator
           Column(children: [
             TextFormField(         
                keyboardType: TextInputType.emailAddress,
@@ -335,7 +347,7 @@ pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubi
                     width: 3 ,                   
                   )
                 ),
-
+          
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
                   borderSide: BorderSide(
@@ -343,7 +355,7 @@ pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubi
                     width: 3 ,                   
                   )
                 ),
-
+          
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
                   borderSide: BorderSide(
@@ -351,7 +363,7 @@ pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubi
                     width: 3 ,                    
                   )
                 ),
-
+          
                 hintText: "type your message...",
                 hintStyle: TextStyle(color: Colors.blue),
                 prefixIcon: Icon(Icons.text_fields),
@@ -374,7 +386,7 @@ pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubi
                     width: 3 ,                   
                   )
                 ),
-
+          
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
                   borderSide: BorderSide(
@@ -382,7 +394,7 @@ pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubi
                     width: 3 ,                   
                   )
                 ),
-
+          
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(22),
                   borderSide: BorderSide(
@@ -390,24 +402,114 @@ pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubi
                     width: 3 ,                    
                   )
                 ),
-
+          
                 hintText: "type your password...",
                 hintStyle: TextStyle(color: Colors.blue),
                 prefixIcon: Icon(Icons.text_fields),
                 suffixIcon: Icon(Icons.hive_rounded , color: Colors.blue,),
                 icon: Icon(Icons.password_rounded),
+                
               ),
-            )
-          ],)
+          
+            ), 
+          
+            Form(
+             autovalidateMode: AutovalidateMode.always ,
+              key: formState ,
+              child: Column(
+                children: [
+                  TextFormField(
+                    onSaved: (text){
+                      username = text ;
+
+                    },
+                    validator: (text){
+                      if (text!.length < 5){
+                        return "minium 6 caractere";
+                      }
+                      if(text.length > 10 ){
+                        return "max caractere 10" ;
+                      }
+                      return null ;
+                    },
+                  ),
+                  TextFormField(
+                    onSaved: (text){
+                      phone = text ;
+
+                    },
+                    validator: (text){
+                      if (text!.length < 5){
+                        return "minium 6 caractere";
+                      }
+                      if(text.length > 10 ){
+                        return "max caractere 10" ;
+                      }
+                      return null ;
+                    },
+                  ),
+                  TextButton(onPressed:(){
+                    var formdata = formState.currentState;
+                        if (formdata == null || formdata.validate()) {
+                          formdata?.save();
+                          print('username : $username');
+                          print('phone : $phone');
+                        } else{
+                          print('not valid');
+                        }
+
+                  },
+                   child: Text('send'),
+                  )
+                  
+            
+                ],
+              ),
+            ) ,                                             
+             ],                      
+            ),
+      
+//slider    
+          Column(
+            children: [
+              Slider(
+                min: 0,
+                max: 100 ,
+                value: _valslider ,
+                 onChanged: (val){
+                setState(() {
+                  
+                  _valslider = val ;
+                  print (_valslider);
+                });
+              }),
+            ],
+          )
       
       
-      
-      
-      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       ] ),
-        
-               
-       
+         
      ),
     ),
     

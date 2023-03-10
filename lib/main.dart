@@ -9,6 +9,7 @@ import 'package:firebase_auth_app/screens/signup_screen.dart';
 import 'package:firebase_auth_app/widgets/home/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +28,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
          primarySwatch: Colors.green,
          
+         textTheme: TextTheme(
+          displayMedium: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.normal, 
+          color: Colors.black,
+                  
+          ) 
+ 
+                     
+         ),
          primaryColor:  kPrimaryColor,
          ),
      
@@ -50,10 +61,8 @@ class MyApp extends StatelessWidget {
             // localizationsDelegates:[
       //   GlobalCupertinoLocalizations.delegate,
       //   GlobalMaterialLocalizations.delegate,
-      //   GlobalWidgetsLocalizations.delegate,
-       
+      //   GlobalWidgetsLocalizations.delegate,      
       // ],
-
       // supportedLocales: [Locale("ar","AE")],
       // locale: Locale("ar","AE"),
 

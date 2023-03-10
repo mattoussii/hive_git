@@ -71,21 +71,15 @@ class _loginScreenState extends State<loginScreen> {
                     fontSize: 40,fontWeight: FontWeight.bold, color: Colors.orange,
                   ),
                   ),
-          
-          
-          
-          
+                                 
                   Text(
                     'welcome back nice to see you again',
                      style: GoogleFonts.robotoCondensed(
                     fontSize: 18,fontWeight: FontWeight.bold, color: Colors.amber[800],
                   ),
                   ),
-          
-          
-          
-                  SizedBox(height: 50,),
-          
+                        
+                  SizedBox(height: 50,),         
           
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -94,48 +88,43 @@ class _loginScreenState extends State<loginScreen> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:20 ),
-                        child: TextField(
-                          controller: _emailController,
-                          decoration: InputDecoration(
-                             border: InputBorder.none,
-                             hintText: 'Email',
-                             ),
-                        ),
+                      child: TextField(
+                        keyboardType: TextInputType.emailAddress,
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person ,color: Colors.black,),
+                           border: InputBorder.none,
+                           hintText: 'Email',
+                           ),
                       ),
                     ),
                   ),
-          
-           
+                     
                   SizedBox(height: 10,),
           
-          
-                   Padding(
+                  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Container(
                       decoration:BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:20 ),
-                        child: TextField(
-                          controller: _passwordController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                             border: InputBorder.none,
-                             hintText: 'password',
-                             ),
-                        ),
+                      child: TextField(                       
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.password_rounded ,color: Colors.black,),
+                           border: InputBorder.none,
+                           hintText: 'password',
+                           ),
                       ),
                     ),
                   ),
-                    SizedBox(height: 10,),
-          
-          
+                                       
+                  SizedBox(height: 10,),
+                   
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.symmetric(horizontal: 85),
                     child: GestureDetector(
                       onTap: signIn ,
                       child: Container(
@@ -157,11 +146,6 @@ class _loginScreenState extends State<loginScreen> {
                       ),
                     ),
                   ),
-
-
-
-
-
 
                   SizedBox(height: 10),
           

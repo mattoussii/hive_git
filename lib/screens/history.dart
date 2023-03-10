@@ -1,7 +1,9 @@
 
 
 
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unnecessary_string_interpolations
+
+
 
 import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +15,15 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
      
-      backgroundColor: Colors.blue[400],
+      backgroundColor: Color.fromARGB(255, 215, 222, 228),
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+            showSearch(context: context, delegate: DataSearch());
+          }, icon: Icon(Icons.search_rounded,color:  Colors.black,))
+        ],
         
-      backgroundColor: Colors.white,
+      backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
         'History',
@@ -69,3 +76,66 @@ class HistoryScreen extends StatelessWidget {
        
 
   }}
+
+  class DataSearch extends SearchDelegate {
+    List names =[
+      'aymen', 'mattoussi', 'fvxcv', 'bvb<lkjg', 'sqfcxdfh', 'shfqc' ,'vsdgg','fgokyj' ,
+      'zedscbgg',
+    ];
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(onPressed: (){
+        query = "" ;
+
+      }, icon: Icon(Icons.close))
+    ];
+ 
+  }
+  
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(onPressed: (){
+      close(context, null);
+    }, icon: Icon(Icons.arrow_back));
+
+ 
+  }
+  
+  @override
+  Widget buildResults(BuildContext context) {
+     return Text("$query");
+ 
+  }
+  
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List filternames = names.where((element) => element.contains(query) )
+    .toList()  ;
+    return ListView.builder(
+      itemCount : query == "" ?  names.length: filternames.length ,
+      itemBuilder: (context , i){
+        return InkWell(
+          onTap: () {
+            query = query == "" ?  names[i] : filternames[i] ;
+            showResults(context);
+          },
+          child: Container(
+            padding:  EdgeInsets.all(10),
+            child: query == "" ?  Text(
+              '${names[i]}',   
+               style: TextStyle(fontSize: 20),
+               ):
+                Text(
+              '${filternames[i]}',  
+               style: TextStyle(fontSize: 20),) 
+               
+               ),
+        ) ;
+
+    });
+
+
+  }
+
+  }
