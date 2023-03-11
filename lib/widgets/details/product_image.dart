@@ -30,7 +30,7 @@ class productImage extends StatelessWidget {
           height: size.width*0.7,
           width: size.width*0.7,
           decoration: BoxDecoration(
-            color: Colors.amber[400],
+            color: Colors.white ,
             shape: BoxShape.circle,
           ),
         ),

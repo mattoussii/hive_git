@@ -39,6 +39,8 @@ class productCard extends StatelessWidget {
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
+
+            //all container 
             Container(
               height: 166,
               decoration: BoxDecoration(
@@ -54,6 +56,9 @@ class productCard extends StatelessWidget {
               ),
              
             ),
+
+
+            //image container 
             Positioned(
               top: 0.0,
               left:0.0,
@@ -69,11 +74,10 @@ class productCard extends StatelessWidget {
               
             )),
               
-              
+              //title container 
             Positioned(
               bottom: 0,
               right: 0,
-              
               child: SizedBox(
               height: 136 ,
               width: size.width -200 ,
@@ -89,9 +93,8 @@ class productCard extends StatelessWidget {
                   ),
               
               
-              
+              //subtitle container 
                   Padding(
-                    
                     padding: const EdgeInsets.all(18),
                     child: Text(
                       
@@ -100,7 +103,7 @@ class productCard extends StatelessWidget {
                       ),
                   ),
               
-              
+              //price container 
                   Padding(
                     padding: const EdgeInsets.all(kDefaultPadding),
                     child: Container(

@@ -1,84 +1,55 @@
-// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers, avoid_types_as_parameter_names, unnecessary_string_interpolations, prefer_typing_uninitialized_variables
-
-
+// ignore_for_file: camel_case_types, use_key_in_widget_constructors, avoid_unnecessary_containers, prefer_const_constructors_in_immutables, prefer_typing_uninitialized_variables, prefer_const_constructors, unused_local_variable, sized_box_for_whitespace
 
 import 'package:firebase_auth_app/constants.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-class visite extends StatefulWidget {
-const visite({Key? key}) : super(key: key);
 
-@override
-_visiteState createState() => _visiteState();
+class visiteScreen extends StatefulWidget {
+  const visiteScreen({super.key});
+
+  @override
+  State<visiteScreen> createState() => _visiteScreenState();
 }
 
-class _visiteState extends State<visite> {
-	
-// Initial Selected Value
-String? dropdownvalue ;
+class _visiteScreenState extends State<visiteScreen> {
 
-// List of items in our dropdown menu
-var items = [	
-	'Item 1',
-	'Item 2',
-	'Item 3',
-	'Item 4',
-	'Item 5',
-];
-// List of images
-List images = [
-  { 'url':'icons/gallery.png'} ,
-  {'url':'icons/help.png'} ,
-  { 'url':'icons/history.png'} ,
-  {'url':'icons/locate.png'} , 
-  {'url':'icons/location.png'} ,
-  {'url':'icons/love.png'} ,
-  {'url':'icons/qr-code.png'} ,
-  {'url':'icons/qr-scan.png'} ,
-  {'url':'icons/qr.png'}, 
-  {'url':'icons/seek.png'} ,
-  {'url':'icons/shop.png'} ,
-  {'url':'icons/trade.png'} ,
-  {'url':'icons/where.png'} ,
-];
-bool check1 = false;
-bool check2 = false;
-bool check3 = false;
-String? radio ;
-bool notify = false;
-
-PageController? pc;
-
-GlobalKey<FormState> formState = new GlobalKey<FormState>();
+  List notes = [
+    {
+      "notes" : " note note note note note note note note note 1 " ,
+      "images" : "shop.png" 
+    },
+        {
+      "notes" : " note note note note note note note note note2 " ,
+      "images" : "gallery.png" 
+    },
+        {
+      "notes" : " note note note note note note note note note 3" ,
+      "images" : "locate.png" 
+    },
+        {
+      "notes" : " note note note note note note note note note 4" ,
+      "images" : "seek.png" 
+    },
+        {
+      "notes" : " note note note note note note note note note 5" ,
+      "images" : "trade.png" 
+    }
+  ];
 
 
-
-
-var username ;
-var phone ;
-
- @override
-initState(){
-  pc = new PageController(initialPage: 10);
-  super.initState();
-}
-var _valslider = 10.0 ;
-@override
-Widget build(BuildContext context) {
-	return Scaffold(
-    backgroundColor: Color.fromARGB(255, 214, 214, 222),
-    appBar: AppBar(
-      actions: [
-        IconButton(onPressed: (){
-          
-        }, icon: Icon(Icons.search_rounded))
-      ],  
+  @override
+  Widget build(BuildContext context) {
+    double size = MediaQuery.of(context).size.width ;
+    return Scaffold(
+            appBar: AppBar(
+        
       backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
-        'visite',
+        'help',
          style: GoogleFonts.robotoCondensed(
                    fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
                   ),),
@@ -95,424 +66,66 @@ Widget build(BuildContext context) {
       ),
 
     ),
-	  body:  SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Padding(
-       padding: const EdgeInsets.symmetric(vertical: 30 ,  horizontal: 10),
-       child:
-        Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-  
-//dropDownMenu Buttons           
-          Container(
-            color: Color.fromARGB(255, 213, 212, 212),
-            child: DropdownButton(
-                    // Down Arrow Icon
-                    icon: const Icon(
-                      Icons.hive_rounded,
-                      color: Colors.yellow,
-                      ),	
-                    
-                    // Array list of items
-                    items: items.map((String items) {
-            return DropdownMenuItem(        
-            value: items,
-            child: Text(items),            
-            );
-                    }).toList(),
-                     hint: Text("Choose an item",
-                     textAlign: TextAlign.center,
-                   style: GoogleFonts.robotoCondensed(
-                fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-              ),),
-                     value: dropdownvalue,
-                    onChanged: (String? newValue) { setState(() { dropdownvalue = newValue ?? "";
-            });
-                    },
-                    focusColor: Colors.red,
-                    dropdownColor: Color.fromARGB(255, 241, 236, 236),
-          style: GoogleFonts.robotoCondensed(
-            fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-              )),
-          ),         
-          SizedBox(height: 40,),
-  
-//checkbox buttons 
-  
-          Column(
-            children:[
-                Text("choose item",
-                  style: GoogleFonts.robotoCondensed(
-                                fontSize: 30,fontWeight: FontWeight.w100, color: Colors.black,
-                              )),
-                        Row(
-                          children: [
-                            Text("item1",
-                                  style: GoogleFonts.robotoCondensed(
-                                  fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-                                )),
-                            Checkbox(value: check1, onChanged: (val){
-                            setState(() {
-                              check1 = val! ;
-                            });
-                            },),
-                          ],
-                        ),
-         
-           Row(
-                  children: [
-                    Text("item2",
-                          style: GoogleFonts.robotoCondensed(
-                          fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-                        )),
-                    Checkbox(value: check2, onChanged: (val){
-                    setState(() {
-                      check2 = val! ;
-                    });
-                    },),
-                  ],
-                ),
-           Row(
-                  children: [
-                    Text("item3",
-                          style: GoogleFonts.robotoCondensed(
-                          fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
-                        )),
-                    Checkbox(value: check3, onChanged: (val){
-                    setState(() {
-                      check3 = val! ;
-                    });
-                    },),
-                  ],
-                ), 
-            ]
-          ),          
-          SizedBox(height: 20,),
-  
-//radio buttons
-          Column( 
-           children: [
-            Text('choose  item',
-             style: GoogleFonts.robotoCondensed(
-                          fontSize: 30,fontWeight: FontWeight.w100, color: Colors.black,
-                        )),
-          Column(
-            children: [                
-              Row(
-                children: [
-                  Text("radio1"),
-                  Radio( activeColor: Colors.green, value: "check1", groupValue: radio, onChanged: (check1){
-                    setState(() {
-                      radio=check1;
-                    });
-                  }),
-                ],
-              ),               
-              Row(
-                children: [
-                  Text("radio2"),
-                  Radio(value: "check2", groupValue: radio, onChanged: (check2){
-                    setState(() {
-                      radio=check2;
-                    });
-                  }),
-                ],
-              ),               
-              Row(
-                children: [
-                  Text("radio3"),
-                  Radio(value: "check3", groupValue: radio, onChanged: (check3){
-                    setState(() {
-                      radio=check3;
-                    });
-                  }),
-                ],
-              ),             ],
-          ),  
-        ],
-         ),   
-          SizedBox(height: 20,),
-// switch buttons   
-          
-  
-          Column(
-            children: [
-              Text(" notifications",
-                    style: GoogleFonts.robotoCondensed(
-                    fontSize: 30,fontWeight: FontWeight.w100, color: Colors.black,
-                            )),
-               Switch(value: notify, onChanged: (val){
-                  setState(() {
-                    notify = val ;
-                  });
-                }),
-            ],
-          ),
-          SizedBox(height: 20,),
-  
-// liste tile            
-           Container(
-             color:  Colors.red,
-            child: ListTile(title:  Text("iphone14"),)),
-           SizedBox(height: 20,),
-//snackbar
-
-           ElevatedButton(
-        onPressed: () {
-          final snackBar = SnackBar(
-            behavior: SnackBarBehavior.floating,
-            content: const Text('Yay! A SnackBar!'),
-            duration:Duration(seconds:2),
-            backgroundColor:  Colors.green,
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.all(10),
-            action: SnackBarAction(
-              label: 'Undo', textColor: Colors.white,
-              onPressed: () {
-                print('undo');
-              },
-            ),
-          );
-          // Find the ScaffoldMessenger in the widget tree
-          // and use it to show a SnackBar.
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-        child: const Text('Show SnackBar'),
-      ),
-           SizedBox(height: 20,), 
-//alertDialog   
-           ElevatedButton(onPressed: (){
-              showDialog(context: context, builder: (context){
-                return AlertDialog(
-                  actions: [
-                    TextButton(onPressed: (){
-                      Navigator.of(context).pop();
-                    }, child: Text('OK')),
-
-                    TextButton(onPressed: (){
-                      Navigator.of(context).pop();
-                    }, child: Text('cancel')),
-                  ],
-
-                  titlePadding: EdgeInsets.only(top: 20,left: 20),
-                  contentPadding: EdgeInsets.all(20),
-                  contentTextStyle: TextStyle( fontWeight: FontWeight.bold,  color: Colors.blue),
-                  titleTextStyle: TextStyle( fontWeight: FontWeight.normal,  color: Colors.red),   
-                  title: Text("title"),
-                  content: Text("content content content"),
-                );
-              });
-            },
-             child: Text("show alert")),
-           SizedBox(height: 20,), 
-//listeview builder    
-//exemple shop screen
-
-
-//pageview builder           
-            Column(
-              children: [
-                SizedBox(
-                  height: 300,
-                  child: PageView.builder(
-                    controller:  pc ,
-                    itemCount: images.length,
-                    itemBuilder: (context, i){
-                      return Image.asset(images[i]['url'], fit: BoxFit.fill,);
-                    }
-
-                    
-
-                  ),
-                ),
-                ElevatedButton(onPressed: (){
-pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubicEmphasized);
-                }, child: Text('return to first page  '))
-              ],
-            ),
-            SizedBox(height: 20,), 
-//Text Field +form validator
-          Column(children: [
-            TextFormField(         
-               keyboardType: TextInputType.emailAddress,
-               maxLines: 1,
-              decoration: InputDecoration(
-                
-                enabled: true,
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(22),
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                    width: 3 ,                   
-                  )
-                ),
-          
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(22),
-                  borderSide: BorderSide(
-                    color: Colors.indigo,
-                    width: 3 ,                   
-                  )
-                ),
-          
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(22),
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                    width: 3 ,                    
-                  )
-                ),
-          
-                hintText: "type your message...",
-                hintStyle: TextStyle(color: Colors.blue),
-                prefixIcon: Icon(Icons.text_fields),
-                suffixIcon: Icon(Icons.send , color: Colors.blue,),
-                icon: Icon(Icons.messenger_outline_rounded),
-              ),
-            ),
-            SizedBox(height: 10,), 
-            TextFormField(         
-               keyboardType: TextInputType.emailAddress,
-               obscureText: true,
-               maxLines: 1,
-              decoration: InputDecoration(
-                
-                enabled: true,
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(22),
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                    width: 3 ,                   
-                  )
-                ),
-          
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(22),
-                  borderSide: BorderSide(
-                    color: Colors.indigo,
-                    width: 3 ,                   
-                  )
-                ),
-          
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(22),
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                    width: 3 ,                    
-                  )
-                ),
-          
-                hintText: "type your password...",
-                hintStyle: TextStyle(color: Colors.blue),
-                prefixIcon: Icon(Icons.text_fields),
-                suffixIcon: Icon(Icons.hive_rounded , color: Colors.blue,),
-                icon: Icon(Icons.password_rounded),
-                
-              ),
-          
-            ), 
-          
-            Form(
-             autovalidateMode: AutovalidateMode.always ,
-              key: formState ,
-              child: Column(
-                children: [
-                  TextFormField(
-                    onSaved: (text){
-                      username = text ;
-
-                    },
-                    validator: (text){
-                      if (text!.length < 5){
-                        return "minium 6 caractere";
-                      }
-                      if(text.length > 10 ){
-                        return "max caractere 10" ;
-                      }
-                      return null ;
-                    },
-                  ),
-                  TextFormField(
-                    onSaved: (text){
-                      phone = text ;
-
-                    },
-                    validator: (text){
-                      if (text!.length < 5){
-                        return "minium 6 caractere";
-                      }
-                      if(text.length > 10 ){
-                        return "max caractere 10" ;
-                      }
-                      return null ;
-                    },
-                  ),
-                  TextButton(onPressed:(){
-                    var formdata = formState.currentState;
-                        if (formdata == null || formdata.validate()) {
-                          formdata?.save();
-                          print('username : $username');
-                          print('phone : $phone');
-                        } else{
-                          print('not valid');
-                        }
-
-                  },
-                   child: Text('send'),
-                  )
-                  
-            
-                ],
-              ),
-            ) ,                                             
-             ],                      
-            ),
-      
-//slider    
-          Column(
-            children: [
-              Slider(
-                min: 0,
-                max: 100 ,
-                value: _valslider ,
-                 onChanged: (val){
-                setState(() {
-                  
-                  _valslider = val ;
-                  print (_valslider);
-                });
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: (){
+               Navigator.of(context).pushNamed('add');
               }),
-            ],
-          )
-      
-      
+            body:
+            Card(   
+              
+              child:  ListView.builder(
 
+                itemCount: notes.length ,
+                itemBuilder : ( context , i) {
+                  return Dismissible(
+                    key:  Key("$i") ,
+                    child: Listnotes(
+                    
+                      notes: notes[i],
+                      
+                    ),
+                  ) ;
+                },
+            ),
+            ),
+    );
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ] ),
-         
-     ),
+class Listnotes extends StatelessWidget{
+  final notes ;
+  
+   Listnotes({this.notes, })  ;
+@override
+Widget build(BuildContext context){
+  return Card(
+    child: Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: Image.asset("icons/history.png",
+           fit: BoxFit.fill,
+          
+           )),
+        Expanded(
+           flex: 3,
+          child: ListTile(
+            title: Text( "title") ,
+            subtitle:  Text( "${notes['notes']}") ,
+            // subtitle:ElevatedButton.icon( 
+              
+            //   icon: Icon(Icons.highlight_remove_rounded),
+            //   label: Text('remove'), 
+            //    onPressed: (){}, ),
+               
+            trailing: IconButton(onPressed: (){},
+             icon: Icon(Icons.edit , color:  Colors.black,)),
+              
+            ),
+        ),
+      ],
     ),
-    
-	);
+  ) ;
 }
 }

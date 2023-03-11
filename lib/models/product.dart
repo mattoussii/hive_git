@@ -19,7 +19,7 @@ List<Product> products = [
     price : 20 ,
     title: 'product name ',
     subTitle: 'subTitle  bla bla',
-    image:'images/airpods.png' ,
+    image:'icons/love.png' ,
     description: 'description bla bla bla bla bla bla' , 
   ),
     Product(

@@ -34,11 +34,14 @@ dependencies:
   image_cropper: ^3.0.1
   shared_preferences: ^2.0.18
   http: ^0.13.5
+  
 
 
 
 
   cupertino_icons: ^1.0.2
+  dropdown_search: ^5.0.6
+  awesome_dialog: ^3.0.2
   barcode_widget: ^2.0.3
   flutter_qr_bar_scanner: ^3.0.2
   flutter_barcode_scanner: any

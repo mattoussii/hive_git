@@ -93,7 +93,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                        
                   SizedBox(height: 50,),
-                   
+
+                                    Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration:BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person_2_rounded ,color: Colors.black,),
+                           border: InputBorder.none,
+                           hintText: 'username',
+                           ),
+                      ),
+                    ),
+                  ),
+                  
+                  SizedBox(height: 10,),
+
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Container(

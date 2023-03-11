@@ -6,12 +6,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_app/constants.dart';
 
-import 'package:firebase_auth_app/screens/help.dart';
+import 'package:firebase_auth_app/screens/visite.dart';
 import 'package:firebase_auth_app/screens/history.dart';
 import 'package:firebase_auth_app/screens/scanner_screen/scanner.dart';
 import 'package:firebase_auth_app/screens/shop_home_screen.dart';
 import 'package:firebase_auth_app/screens/gallery.dart';
-import 'package:firebase_auth_app/screens/visite.dart';
+import 'package:firebase_auth_app/screens/help.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                         Navigator.pop(context);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context)=>visite()
+                        builder: (context)=>helpscreen()
                         ));
                       
                     },
@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context)=>helpScreen()
+                        builder: (context)=>visiteScreen()
                         ));
                       
                     },
@@ -222,6 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SizedBox.fromSize(
                   size: Size(90, 90),
                   child: ClipOval(
+                    
                     child: Material(
                       color: Colors.green,
                       child: InkWell(
@@ -347,37 +348,37 @@ class _HomeScreenState extends State<HomeScreen> {
               //                           ),  ),), ), ),
               // ),
                   Expanded(
-              child: Container(
-              alignment: Alignment.bottomCenter,
-                margin: EdgeInsets.symmetric(
-                  horizontal: kDefaultPadding,
-                  vertical: kDefaultPadding ,
-            ),
-              child: SizedBox.fromSize(
-                  size: Size(90, 90),
-                  child: ClipOval(
-                    child: Material(
-                      color: Colors.green,
-                      child: InkWell(
-                            splashColor: Colors.amber, 
-       
-                            onTap: () {  Navigator.push(context,
-                                 MaterialPageRoute(builder: (context) =>visite() ),
-                                    ); }, 
-       
-       
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(Icons.check_circle,
-                                color: Colors.white,), // <-- Icon
-                                Text("visite ",
-                                                          style: GoogleFonts.robotoCondensed(
-                                              color: Colors.white54,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                                  )), // <-- Text
-                ], ),  ), ), ),), ),),
+                    child: Container(
+                    alignment: Alignment.bottomCenter,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: kDefaultPadding,
+                        vertical: kDefaultPadding ,
+                  ),
+                    child: SizedBox.fromSize(
+                        size: Size(90, 90),
+                        child: ClipOval(
+                          child: Material(
+                            color: Colors.green,
+                            child: InkWell(
+                                  splashColor: Colors.amber, 
+            
+                                  onTap: () {  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) =>visiteScreen() ),
+                                          ); }, 
+            
+            
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(Icons.note_add_rounded,
+                                      color: Colors.white,), // <-- Icon
+                                      Text("visite",
+                                                                style: GoogleFonts.robotoCondensed(
+                                                    color: Colors.white54,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18,
+                                                        )), // <-- Text
+                      ], ),  ), ), ),), ),),
               ],
             ), 
        //third row history page and help page        
@@ -415,7 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               fontSize: 18,
                                                   )), // <-- Text
                 ], ),  ), ), ),), ),),
-                  Expanded(
+                                    Expanded(
               child: Container(
               alignment: Alignment.bottomCenter,
                 margin: EdgeInsets.symmetric(
@@ -431,7 +432,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             splashColor: Colors.amber, 
        
                             onTap: () {  Navigator.push(context,
-                                 MaterialPageRoute(builder: (context) =>helpScreen() ),
+                                 MaterialPageRoute(builder: (context) =>helpscreen() ),
                                     ); }, 
        
        
@@ -440,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: <Widget>[
                                 Icon(Icons.help_rounded,
                                 color: Colors.white,), // <-- Icon
-                                Text("help",
+                                Text("help ",
                                                           style: GoogleFonts.robotoCondensed(
                                               color: Colors.white54,
                                               fontWeight: FontWeight.bold,
