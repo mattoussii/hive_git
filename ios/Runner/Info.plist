@@ -52,6 +52,11 @@
 		<key>NSphotoLibraryUsageDescription</key>
 		<string>Use images as profile photo</string>
 		<key>NSphotoMicrophoneUsageDescription</key>
-		<string>record videos for profile </string>
+		<string>record videos for profile</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>This app needs access to location when open.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>This app needs access to location when in the background.</string>
+
 	</dict>
 </plist>

@@ -68,7 +68,7 @@ Widget build(BuildContext context) {
       backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
-        'visite',
+        'help',
          style: GoogleFonts.robotoCondensed(
                    fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
                   ),),

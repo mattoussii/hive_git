@@ -49,7 +49,7 @@ class _visiteScreenState extends State<visiteScreen> {
       backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
-        'help',
+        'visite',
          style: GoogleFonts.robotoCondensed(
                    fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
                   ),),

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_build_context_synchronously, unused_field
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously, unused_field, avoid_single_cascade_in_expression_statements, unrelated_type_equality_checks
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +39,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void openSignupScreen(){
     Navigator.of(context).pushReplacementNamed('loginScreen');
+        
+
+     
   }
 
   @override
@@ -94,24 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                        
                   SizedBox(height: 50,),
 
-                                    Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Container(
-                      decoration:BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.person_2_rounded ,color: Colors.black,),
-                           border: InputBorder.none,
-                           hintText: 'username',
-                           ),
-                      ),
-                    ),
-                  ),
+
                   
                   SizedBox(height: 10,),
 
@@ -179,47 +165,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   SizedBox(height: 10,),
 
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Container(
-                      decoration:BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: TextField(
-                        keyboardType: TextInputType.phone,
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.phone ,color: Colors.black,),
-                           border: InputBorder.none,
-                           hintText: 'phone number',
-                           ),
-                      ),
-                    ),
-                  ),
+
 
                   SizedBox(height: 10,),
                   
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Container(
-                      decoration:BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.home ,color: Colors.black,),
-                           border: InputBorder.none,
-                           hintText: 'adress',
-                           ),
-                      ),
-                    ),
-                  ),
+
 
                   SizedBox(height: 10,),
           
