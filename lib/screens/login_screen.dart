@@ -31,6 +31,15 @@ class _loginScreenState extends State<loginScreen> {
     Navigator.of(context).pushReplacementNamed('signupScreen');
   }
 
+
+
+
+
+
+
+
+
+
   @override
 
   void dispose(){

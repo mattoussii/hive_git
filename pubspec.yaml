@@ -34,11 +34,6 @@ dependencies:
   image_cropper: ^3.0.1
   shared_preferences: ^2.0.18
   http: ^0.13.5
-  
-
-
-
-
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.2.5
   geocoding: ^2.1.0

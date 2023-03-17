@@ -21,16 +21,12 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> {
      File ? _file ;
-
-
-
   Future pickercamera() async{
-    final myfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final myfile = await ImagePicker().pickImage(source: ImageSource.camera);
     setState(() {
       _file = File(myfile!.path);
     });
   }
-
 
   Future upload() async {
     if(_file == null) return ;
@@ -42,8 +38,6 @@ class _TestState extends State<Test> {
     
   }
   
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

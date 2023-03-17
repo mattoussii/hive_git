@@ -72,7 +72,9 @@ class HistoryScreen extends StatelessWidget {
 
     )
        )
-       ),);
+       ),
+       
+       );
        
 
   }}

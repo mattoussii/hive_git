@@ -1,4 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers, avoid_types_as_parameter_names, unnecessary_string_interpolations, prefer_typing_uninitialized_variables
+import 'dart:convert';
+import 'package:http/http.dart' as http ;
 import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,12 +51,30 @@ GlobalKey<FormState> formState = new GlobalKey<FormState>();
 var username ;
 var phone ;
 
+
+  List posts = [];
+  Future getPost() async {
+    var  url = "https://jsonplaceholder.typicode.com/posts" ;
+    
+    var response = await http.get(Uri.parse(url));
+    var respnsebody = jsonDecode(response.body);
+    
+    setState(() {
+      posts.addAll(respnsebody) ;
+    });
+    print(posts) ;
+  }
+
+
+
+var _valslider = 10.0 ;
+
  @override
 initState(){
   pc = new PageController(initialPage: 10);
   super.initState();
+  getPost();
 }
-var _valslider = 10.0 ;
 @override
 Widget build(BuildContext context) {
 	return Scaffold(
@@ -223,9 +243,7 @@ Widget build(BuildContext context) {
         ],
          ),   
           SizedBox(height: 20,),
-// switch buttons   
-          
-  
+// switch buttons     
           Column(
             children: [
               Text(" notifications",
@@ -240,14 +258,12 @@ Widget build(BuildContext context) {
             ],
           ),
           SizedBox(height: 20,),
-  
 // liste tile            
            Container(
              color:  Colors.red,
             child: ListTile(title:  Text("iphone14"),)),
            SizedBox(height: 20,),
 //snackbar
-
            ElevatedButton(
         onPressed: () {
           final snackBar = SnackBar(
@@ -296,8 +312,6 @@ Widget build(BuildContext context) {
             },
              child: Text("show alert")),
            SizedBox(height: 20,), 
-
-
 //awsome dialoge 
 Column(children: [
   ElevatedButton(onPressed: (){
@@ -314,14 +328,6 @@ Column(children: [
   },
    child: Text("show dailog bel fazet"))
 ],),
-
-
-
-
-//listeview builder    
-//exemple shop screen
-
-
 //pageview builder           
             Column(
               children: [
@@ -495,8 +501,23 @@ pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubi
                 });
               }),
             ],
-          )
-      
+          ),
+      //http 
+
+      //  ListView.builder(
+      //   itemCount: posts.length,
+      //   itemBuilder: (context , i){
+      //     return Text('${posts[i]['title']}');
+
+      //   }) ,
+        
+
+
+   
+
+
+
+
       
 
 
