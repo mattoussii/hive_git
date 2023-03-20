@@ -1,10 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers, avoid_types_as_parameter_names, unnecessary_string_interpolations, prefer_typing_uninitialized_variables
-import 'dart:convert';
-import 'package:http/http.dart' as http ;
+import 'package:firebase_auth_app/sqldb.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+
 
 
 
@@ -53,28 +53,34 @@ var phone ;
 
 
   List posts = [];
-  Future getPost() async {
-    var  url = "https://jsonplaceholder.typicode.com/posts" ;
+  // Future getPost() async {
+  //   var  url = "https://jsonplaceholder.typicode.com/posts" ;
     
-    var response = await http.get(Uri.parse(url));
-    var respnsebody = jsonDecode(response.body);
+  //   var response = await http.get(Uri.parse(url));
+  //   var respnsebody = jsonDecode(response.body);
     
-    setState(() {
-      posts.addAll(respnsebody) ;
-    });
-    print(posts) ;
-  }
-
-
+  //   setState(() {
+  //     posts.addAll(respnsebody) ;
+  //   });
+  //   print(posts) ;
+  // }
 
 var _valslider = 10.0 ;
-
  @override
 initState(){
   pc = new PageController(initialPage: 10);
   super.initState();
-  getPost();
+  // getPost();
 }
+
+
+
+
+SqlDb slqdb = SqlDb() ;
+
+
+
+
 @override
 Widget build(BuildContext context) {
 	return Scaffold(
@@ -503,19 +509,36 @@ pc!.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeInOutCubi
             ],
           ),
       //http 
-
       //  ListView.builder(
       //   itemCount: posts.length,
       //   itemBuilder: (context , i){
       //     return Text('${posts[i]['title']}');
-
       //   }) ,
-        
 
 
-   
+//sqflite 
 
 
+ElevatedButton.icon(onPressed: () async {
+  int response = await slqdb.inserData("INSERT INTO 'notes'('note') values ('note two') ");
+  print(response) ;
+
+}, icon: Icon(Icons.add), label: Text("INSERT data")),
+
+ElevatedButton.icon(onPressed: () async{
+  List<Map> response = await slqdb.readData("SELECT *FROM 'notes'") ;
+  print(response);
+}, icon: Icon(Icons.read_more_rounded), label: Text("READ  data")),
+
+ElevatedButton.icon(onPressed: () async{
+   int  response = await slqdb.deleteData("DELETE FROM 'notes' WHERE id = 9 ") ;
+  print(response);
+}, icon: Icon(Icons.delete), label: Text("DELETE  data")), 
+
+ElevatedButton.icon(onPressed: () async{
+   int  response = await slqdb.updateData("UPDATE 'notes' SET 'note' ='note six' WHERE id = 1") ;
+  print(response);
+}, icon: Icon(Icons.update), label: Text("UPDATE  data")), 
 
 
       

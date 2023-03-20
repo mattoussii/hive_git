@@ -1,15 +1,16 @@
-// ignore_for_file: camel_case_types,// prefer_const_constructors,//prefer_const_literals_to_create_immutables,//use_build_context_synchronously,// avoid_single_cascade_in_expression_statements, //prefer_typing_uninitialized_variables, avoid_print,// non_constant_identifier_names,// depend_on_referenced_packages,, depend_on_referenced_packages, unused_local_variable, prefer_const_constructors, avoid_unnecessary_containers, unnecessary_null_comparison, prefer_const_literals_to_create_immutables, use_build_context_synchronously 
+// ignore_for_file: camel_case_types,// prefer_const_constructors,//prefer_const_literals_to_create_immutables,//use_build_context_synchronously,// avoid_single_cascade_in_expression_statements, //prefer_typing_uninitialized_variables, avoid_print,// non_constant_identifier_names,// depend_on_referenced_packages,, depend_on_referenced_packages, unused_local_variable, prefer_const_constructors, avoid_unnecessary_containers, unnecessary_null_comparison, prefer_const_literals_to_create_immutables, use_build_context_synchronously, unused_import, unused_field 
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth_app/constants.dart';
+import 'package:firebase_auth_app/screens/visite.dart';
+import 'package:firebase_auth_app/sqldb.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart'; // for date formatting
-import 'package:http/http.dart' as http ;
-import 'dart:convert';
+
 
 class add extends StatefulWidget {
   const add({super.key});
@@ -48,13 +49,10 @@ class _addState extends State<add> {
       }
     }
   }
-
   Future<Position> getLatAndLong() async {
     return await Geolocator.getCurrentPosition().then((value) =>  value);
   }
 
-  final TextEditingController _date = TextEditingController() ;
- 
   File ? _file ;
   Future pickercamera() async{
     final myfile = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -71,22 +69,20 @@ class _addState extends State<add> {
   }
 
 
-  List posts = [];
-  Future getPost() async {
-    String  url = "https://jsonplaceholder.typicode.com/posts" ;
-    var response = await http.get(Uri.parse(url));
-    var respnsebody = jsonDecode(response.body) ; 
-    
-  return respnsebody ;
-  }
- 
   
   @override
   void initState() {
     getPositon();
-    getPost();
     super.initState();
   }  
+
+SqlDb sqlDb =SqlDb() ;
+
+GlobalKey<FormState> formState =GlobalKey() ;
+final TextEditingController note  = TextEditingController() ;
+final TextEditingController title = TextEditingController() ;
+final TextEditingController date = TextEditingController() ;
+
   @override
   Widget build(BuildContext context) {    
     var time = DateTime.now() ;
@@ -97,19 +93,24 @@ class _addState extends State<add> {
       body : SingleChildScrollView(
         child: Container(child : Column(
           children: [
+
             Form(child: Column(
               children: [
+                //title
                 TextFormField(
+                  controller: title,
                   maxLength: 30 ,
                   decoration: InputDecoration(
                   filled: true,
                   fillColor: kBackgroundColor,
-                  labelText: 'title note',
+                  labelText: 'nom de ruche ',
                    iconColor: Colors.black,
                   prefixIcon: Icon(Icons.note_add , color:  Colors.green,)
                 ),
                 ),
+                //note
                 TextFormField(
+                  controller: note,
                     minLines: 1,
                     maxLines: 3,
                     maxLength: 200 ,
@@ -122,12 +123,12 @@ class _addState extends State<add> {
                 ),
                 ),
                 ///time
-               TextFormField(
-                  controller: _date,
+                TextFormField(
+                  controller: date,
                   decoration: InputDecoration(
                   filled: true,
                   fillColor: kBackgroundColor,
-                  labelText: ' select date',
+                  labelText: '  date de creation ',
                    iconColor: Colors.black,
                   prefixIcon: Icon(Icons.calendar_today , color:  Colors.green,), 
                 ),
@@ -139,53 +140,57 @@ class _addState extends State<add> {
                       lastDate: DateTime(2100));
                   if(pickDate!= null){
                     setState(() {
-                      _date.text = DateFormat('yyyy-mm-dd').format(pickDate) ;
+                      date.text = DateFormat('yyyy-mm-dd').format(pickDate) ;
                     });
                   }
                   
                 } ,
                 ),                     
-                //add image front
-                ElevatedButton(
-                   child:  Text('add image for note'),
-                   onPressed: (){ showButtomSheet();}, ),  
-                Center(child: _file == null ? const Text('image not selected') : Image.file(_file!),),                                
-               //location(get latitude and longitude) button                            
-                ElevatedButton(onPressed: () async {
-                  cl = await getLatAndLong()  ;
-                  print('lat ${cl!.latitude}');
-                  print('lat ${cl!.longitude}');             
-                  List<Placemark> placemarks = await 
-                  placemarkFromCoordinates(cl!.latitude,cl!.longitude);
-                  print(placemarks[0].locality);
-                }
-                , child: Text('show location')             
-                ),
-                //add note button
-                ElevatedButton(onPressed: (){},
-                             child:  Padding(
-                               padding: const EdgeInsets.all(10),
-                               child: Text('add note', 
-                               style: Theme.of(context).textTheme.headlineMedium,),
-                             ),
-                             ),
-               
-                //http
-              // FutureBuilder(
-              //     future:  getPost(),
-              //     builder: (context , snapshot) {
-              //       if(snapshot.hasData){
-              //        return ListView.builder(
-              //         itemCount: snapshot.data.length,
-              //         itemBuilder: (context ,i){
-              //           return Container(
-              //             child: Text("${snapshot.data[i]["title"]}"),);
-              //       });
-              //       }
-              //       return Text('no data found') ; } 
-              //  ),
+             
+             
+                //add image and show location
+                // ElevatedButton(
+                //    child:  Text('add image for note'),
+                //    onPressed: (){ showButtomSheet();}, ),                
+                // Center(child: _file == null ? const Text('image not selected') : Image.file(_file!),),                                                        
+              //                
+                //location(get latitude and longitude) button                            
+              //   ElevatedButton(onPressed: () async {
+              //     cl = await getLatAndLong()  ;
+              //     print('latitude ${cl!.latitude}');
+              //     print('longitude ${cl!.longitude}');             
+              //     List<Placemark> placemarks = await 
+              //     placemarkFromCoordinates(cl!.latitude,cl!.longitude);
+              //     print(placemarks[0].subLocality);
+              //   } , child: Text('show location') 
+              //   ),
 
-            
+
+
+                SizedBox(height: 50,),
+                //add note button
+                ElevatedButton(onPressed: () async{
+                 int response = await sqlDb.inserData(
+                  '''
+                  INSERT INTO notes('note','title','date') 
+                  VALUES("${note.text}","${title.text}","${date.text}")
+                  '''
+                  ) ; 
+                  if(response > 0){
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context)=>visiteScreen()),
+                       (route) => false);
+                  }
+                 print('respons***********************');
+                 print(response) ;       
+                },
+                child:  Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text( 'add note',) ,
+                ),
+                ),
+
+  
               ],
             ))
           ],
