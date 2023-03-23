@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, library_private_types_in_public_api
 
+import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
 
@@ -32,6 +33,7 @@ class _SecondState extends State<Second> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackgroundColor,
       floatingActionButton: SizedBox.fromSize(
          size: Size(60, 60),
         child: ClipOval(
@@ -72,19 +74,21 @@ class _SecondState extends State<Second> {
                 ),
               ),
             )
-          : Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Code :" + _qrInfo!,
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                  ),
-                ],
+          : Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+           
+            children: [
+               Image.asset(
+                'icons/qr.png',),
+
+               Text(
+                "Code :" + _qrInfo!,
+                style: TextStyle(
+                  fontSize: 25,
+                ),
               ),
-            ),
+            ],
+          ),
     );
   }
 }

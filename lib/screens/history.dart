@@ -50,8 +50,9 @@ class HistoryScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('images/hive.png',
-                height: 150,),
+                Image.asset('icons/history.png',
+                height: 250,),
+                
                 SizedBox(height :10),
                 Text(
                   'History',
@@ -61,12 +62,6 @@ class HistoryScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 50,),
 
-                  Text(
-                    'this page is not available at the moment :( ',
-                     style: GoogleFonts.robotoCondensed(
-                    fontSize: 18,fontWeight: FontWeight.bold, color: Colors.black,
-                  ),
-                  )
                   ],
                   )
 

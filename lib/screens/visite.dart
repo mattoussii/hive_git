@@ -94,6 +94,7 @@ SqlDb sqlDb =SqlDb() ;
                     shrinkWrap: true,
                     itemBuilder: (context , i) {
                       return Card(child: ListTile(
+                        leading: Image.asset('icons/history.png'),
                         title: Text('${notes[i]['title']}'),
                         subtitle: Text('${notes[i]['date']}'),
                         trailing: Row(

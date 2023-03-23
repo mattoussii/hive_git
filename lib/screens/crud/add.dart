@@ -72,7 +72,7 @@ class _addState extends State<add> {
   
   @override
   void initState() {
-    getPositon();
+    // getPositon();
     super.initState();
   }  
 
