@@ -1,8 +1,9 @@
 
-// ignore_for_file: prefer_const_constructors_in_immutables, camel_case_types, prefer_const_constructors, sized_box_for_whitespace, non_constant_identifier_names, unused_field, prefer_final_fields, use_build_context_synchronously, avoid_print
+// ignore_for_file: prefer_const_constructors_in_immutables, camel_case_types, prefer_const_constructors, sized_box_for_whitespace, non_constant_identifier_names, unused_field, prefer_final_fields, use_build_context_synchronously, avoid_print, body_might_complete_normally_nullable, avoid_types_as_parameter_names
 
 import 'package:firebase_auth_app/components/CustumTxtForm.dart';
 import 'package:firebase_auth_app/components/LinkAPI.dart';
+import 'package:firebase_auth_app/components/valid.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/crud.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,8 @@ TextEditingController password = TextEditingController() ;
  
 
  Signup()async{
-    isloading = true ;
+  if(formstate.currentState!.validate()){
+      isloading = true ;
   setState((){});
   var response = await _crud.postRequest(linkSignup, {
     "username" : username.text ,
@@ -36,10 +38,14 @@ TextEditingController password = TextEditingController() ;
   setState((){});
 
   if (response["status"] == "success"){
-    Navigator.of(context).pushNamedAndRemoveUntil("home", (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil("success", (route) => false);
   }else{
     print('sign up fail');
   }
+  }else{
+    print("signup fail");
+  }
+
  }
 
 
@@ -62,15 +68,24 @@ TextEditingController password = TextEditingController() ;
                
                 CustumTxtForm(
                   hint: 'username',
-                   mycontroller: username,),
+                   mycontroller: username,
+                    valid: (val) { 
+                      return validInput(val!, 3, 20) ;
+                     },),
                
                 CustumTxtForm(
                   hint: 'email',
-                   mycontroller: email,),
+                   mycontroller: email, 
+                   valid: (val) { 
+                    return validInput(val!, 10, 30) ;
+                    },),
                 
                 CustumTxtForm(
                   hint: 'password',
-                   mycontroller: password,),
+                   mycontroller: password,
+                    valid: (val ) {  
+                      return validInput(val!, 3, 20) ;
+                    },),
               
                 MaterialButton(
                   color: Colors.green,
@@ -79,8 +94,7 @@ TextEditingController password = TextEditingController() ;
                   onPressed: () async {
                    await  Signup();
                   }, 
-                child: Text('signup')),
-              
+                child: Text('signup')), 
                 SizedBox(height: 10,),
                 
                 Container( height:40, width: 40,

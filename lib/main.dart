@@ -4,6 +4,7 @@
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/screens/Auth/login.dart';
 import 'package:firebase_auth_app/screens/Auth/signup.dart';
+import 'package:firebase_auth_app/screens/Auth/success.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/auth.dart';
 import 'package:firebase_auth_app/screens/crud/add.dart';
 import 'package:firebase_auth_app/screens/home_screen.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         'signup':(context) => signup(),
         'login':(context) => Login(),
         'home':(context) => HomeScreen() ,
+        'success':(context) => success() ,
 
 
         'add':(context) => add() ,
