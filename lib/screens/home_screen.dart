@@ -26,7 +26,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   
-  final user = FirebaseAuth.instance.currentUser!;
+  // final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
    
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 15,fontWeight: FontWeight.bold, color: Colors.black,
                               ),
                       ),
-                        Text(user.email!,
+                        Text("welcome back",
                         style: GoogleFonts.robotoCondensed(
                               fontSize: 15,fontWeight: FontWeight.normal, color: Colors.black,
                               ),
@@ -199,15 +199,15 @@ class _HomeScreenState extends State<HomeScreen> {
               
               
               ),
-                  Text(
-              user.email!,
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold, 
-                  color: Colors.white54,
-                  ), 
+                  // Text(
+              // // user.email!,
+              // style: TextStyle(
+              //     fontSize: 18,
+              //     fontWeight: FontWeight.bold, 
+              //     color: Colors.white54,
+              //     ), 
               
-              ),
+              //  ),
              SizedBox(height: 75),
        // first row  pages shop and gallery 
             Row(

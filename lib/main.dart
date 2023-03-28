@@ -2,11 +2,13 @@
 // ignore_for_file: unused_import, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:firebase_auth_app/constants.dart';
-import 'package:firebase_auth_app/screens/auth.dart';
+import 'package:firebase_auth_app/screens/Auth/login.dart';
+import 'package:firebase_auth_app/screens/Auth/signup.dart';
+import 'package:firebase_auth_app/screens/firebase_auth/auth.dart';
 import 'package:firebase_auth_app/screens/crud/add.dart';
 import 'package:firebase_auth_app/screens/home_screen.dart';
-import 'package:firebase_auth_app/screens/login_screen.dart';
-import 'package:firebase_auth_app/screens/signup_screen.dart';
+import 'package:firebase_auth_app/screens/firebase_auth/login_screen.dart';
+import 'package:firebase_auth_app/screens/firebase_auth/signup_screen.dart';
 import 'package:firebase_auth_app/widgets/home/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -45,14 +47,17 @@ class MyApp extends StatelessWidget {
 
 
 
+       initialRoute: "login",
+       routes: {
+        'signup':(context) => signup(),
+        'login':(context) => Login(),
+        'home':(context) => HomeScreen() ,
 
 
-      routes: {
-        '/':(context) => Auth(),
-        'loginScreen':(context) => loginScreen() ,
-        'homeScreen':(context) => HomeScreen() ,
-        'signupScreen':(context) => SignUpScreen() ,
         'add':(context) => add() ,
+        // 'loginScreen':(context) => loginScreen() ,
+        // 'signupScreen':(context) => SignUpScreen() ,
+        
       }
 
 
