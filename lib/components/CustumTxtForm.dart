@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names, unused_import
 
 
+import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustumTxtForm extends StatelessWidget {
@@ -13,20 +14,26 @@ class CustumTxtForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-    margin: EdgeInsets.only(bottom: 10),
-      child: TextFormField(
-        validator: valid ,
-        controller:  mycontroller ,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 8,horizontal: 10),
-           hintText: hint ,
-           border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(color: Colors.black , width: 1)
+    return Padding(
+       padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Container( 
+      decoration:BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+        child: TextFormField(
+          
+          validator: valid ,
+          controller:  mycontroller ,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 8,horizontal: 10),
+             hintText: hint ,
+             border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderSide: BorderSide(color: Colors.black , width: 1)
+            )
           )
-        )
-    
+        ),
       ),
     );
   }
