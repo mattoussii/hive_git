@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
 
 import 'package:firebase_auth_app/constants.dart';
-import 'package:firebase_auth_app/screens/home_screen.dart';
+import 'package:firebase_auth_app/screens/home.dart';
 import 'package:firebase_auth_app/screens/scanner_screen/first.dart';
 import 'package:firebase_auth_app/screens/scanner_screen/second.dart';
 import 'package:flutter/material.dart';

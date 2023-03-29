@@ -7,17 +7,22 @@ import 'package:firebase_auth_app/screens/Auth/signup.dart';
 import 'package:firebase_auth_app/screens/Auth/success.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/auth.dart';
 import 'package:firebase_auth_app/screens/crud/add.dart';
-import 'package:firebase_auth_app/screens/home_screen.dart';
+import 'package:firebase_auth_app/screens/home.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/login_screen.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/signup_screen.dart';
 import 'package:firebase_auth_app/widgets/home/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
+
+late SharedPreferences sharedPref ;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  sharedPref = await SharedPreferences.getInstance() ; 
+  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -29,26 +34,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
 
       debugShowCheckedModeBanner: false,
+     
       theme: ThemeData(
-         primarySwatch: Colors.green,
-         
+         primarySwatch: Colors.green, 
          textTheme: TextTheme(
           displayMedium: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.normal, 
-          color: Colors.black,
-                  
-          ) 
- 
-                     
+          color: Colors.black,                
+          )
          ),
          primaryColor:  kPrimaryColor,
          ),
      
-
-
-
-       initialRoute: "login",
+      title: "Hive",
+     
+       initialRoute: sharedPref.getString("id") == null ? "login" : "home" ,
+     
        routes: {
         'signup':(context) => signup(),
         'login':(context) => Login(),

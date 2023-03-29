@@ -5,11 +5,12 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_app/constants.dart';
+import 'package:firebase_auth_app/main.dart';
 
 import 'package:firebase_auth_app/screens/visite.dart';
 import 'package:firebase_auth_app/screens/history.dart';
 import 'package:firebase_auth_app/screens/scanner_screen/scanner.dart';
-import 'package:firebase_auth_app/screens/shop_home_screen.dart';
+import 'package:firebase_auth_app/screens/shop/shop_home_screen.dart';
 import 'package:firebase_auth_app/screens/gallery.dart';
 import 'package:firebase_auth_app/screens/help.dart';
 import 'package:flutter/material.dart';
@@ -453,46 +454,50 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
        // last row  sign out button 
             SizedBox(height: 50),
-            Row(
+          Row(
             children: [
-         Expanded(
-           child: Container(
-           alignment: Alignment.bottomCenter,
-            margin: EdgeInsets.symmetric(
-              horizontal: kDefaultPadding,
-              vertical: kDefaultPadding ,
-            ),
-              child: SizedBox.fromSize(
-                  size: Size(90, 90),
-                  child: ClipOval(
-                    child: Material(
-                      color: Colors.green,
-                      child: InkWell(
-                            splashColor: Colors.amber, 
-                            onTap: () {FirebaseAuth.instance.signOut();}, 
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(Icons.logout_rounded,
-                                color: Colors.white,), // <-- Icon
-                                Text("log out",
-                                                          style: GoogleFonts.robotoCondensed(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                                  )), // <-- Text
-                              ],
-                            ),
-                      ),
+                Expanded(
+                  child: Container(
+                  alignment: Alignment.bottomCenter,
+                    margin: EdgeInsets.symmetric(
+                      horizontal: kDefaultPadding,
+                      vertical: kDefaultPadding ,
                     ),
-                  ),
-       ),
-             ),
-             
-         ),
+                      child: SizedBox.fromSize(
+                          size: Size(90, 90),
+                          child: ClipOval(
+                            child: Material(
+                              color: Colors.green,
+                              child: InkWell(
+                                    splashColor: Colors.amber, 
+                                    onTap: () {
+                                      sharedPref.clear() ;
+                                      Navigator.of(context).pushNamedAndRemoveUntil("login", (route) => false);
+                                    }, 
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(Icons.logout_rounded,
+                                        color: Colors.white,), // <-- Icon
+                                        Text("log out",
+                                                                  style: GoogleFonts.robotoCondensed(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 18,
+                                                          )), // <-- Text
+                                      ],
+                                    ),
+                              ),
+                            ),
+                          ),
+              ),
+                    ),
+                    
+                ),
+            ],
+          ),
 
-
-],), ],),),), ] ); } 
+ ],),),), ] ); } 
 
 
 

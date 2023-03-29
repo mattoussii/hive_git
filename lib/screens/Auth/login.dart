@@ -7,6 +7,7 @@ import 'package:firebase_auth_app/components/LinkAPI.dart';
 import 'package:firebase_auth_app/components/valid.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/crud.dart';
+import 'package:firebase_auth_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,6 +26,7 @@ TextEditingController password = TextEditingController() ;
 
  Crud _crud = Crud();
  bool isloading = false ;
+
 Login() async{
 
 if(formstate.currentState!.validate()){
@@ -33,14 +35,15 @@ if(formstate.currentState!.validate()){
   var response = await _crud.postRequest(linkLogin,{
     "email":email.text ,
     "password" :password.text ,
-});
+   });
   isloading =false ;
   setState(() { });
-
 if(response["status"] == "success"){
+  sharedPref.setString("id", response['data']['id'].toString());
+  sharedPref.setString("username", response['data']['username']);
+  sharedPref.setString("password", response['data']['password']);
   Navigator.of(context).pushNamedAndRemoveUntil('home', (route) => false);
 }else{
-
            AwesomeDialog(
             context: context,
             dialogType: DialogType.warning,
