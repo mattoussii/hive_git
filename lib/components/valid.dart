@@ -7,14 +7,16 @@ validInput( String val, int min , int max){
  if (val.length > max ){
   return "$msgInputmax $max " ;
  }
+ 
+  if(val.isEmpty){
+  return"$msgInputEmpty" ;
+ }
 
   if (val.length < min ){
   return "$msgInputmin $min " ;
  }
 
- if(val.isEmpty){
-  return"$msgInputEmpty" ;
- }
+
 
 
 }

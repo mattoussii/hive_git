@@ -10,7 +10,7 @@ class Crud {
     try{
       var response =await http.get(Uri.parse(url) ) ;
       if(response.statusCode == 200){
-        var responsebody =jsonDecode(response.body);
+        var responsebody = jsonDecode(response.body);
         return responsebody ;
       }else{
         print("erroe ${response.statusCode}");
@@ -25,7 +25,7 @@ class Crud {
     try{
       var response =await http.post(Uri.parse(url), body: data ) ;
       if(response.statusCode == 200){
-        var responsebody =jsonDecode(response.body);
+        var responsebody = jsonDecode(response.body);
         return responsebody ;
       }else{
         print("erroe ${response.statusCode}");

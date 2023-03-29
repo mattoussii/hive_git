@@ -8,3 +8,5 @@ const String linkServerName= "http://192.168.1.3:9999/app_php";
 
 //auth
 const String linkSignup = "$linkServerName/auth/signup.php";
+
+const String linkLogin = "$linkServerName/auth/login.php";
