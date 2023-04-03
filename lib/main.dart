@@ -6,10 +6,12 @@ import 'package:firebase_auth_app/screens/Auth/login.dart';
 import 'package:firebase_auth_app/screens/Auth/signup.dart';
 import 'package:firebase_auth_app/screens/Auth/success.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/auth.dart';
-import 'package:firebase_auth_app/screens/crud/add.dart';
+import 'package:firebase_auth_app/screens/visite/add.dart';
 import 'package:firebase_auth_app/screens/home.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/login_screen.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/signup_screen.dart';
+import 'package:firebase_auth_app/screens/visite/edit.dart';
+import 'package:firebase_auth_app/screens/visite/visite.dart';
 import 'package:firebase_auth_app/widgets/home/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -56,9 +58,12 @@ class MyApp extends StatelessWidget {
         'login':(context) => Login(),
         'home':(context) => HomeScreen() ,
         'success':(context) => success() ,
-
-
+        'visite':(context) => visiteScreen() ,
         'add':(context) => add() ,
+        'edit':(context) => edit() ,
+        
+
+        
         // 'loginScreen':(context) => loginScreen() ,
         // 'signupScreen':(context) => SignUpScreen() ,
         

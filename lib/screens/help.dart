@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers, avoid_types_as_parameter_names, unnecessary_string_interpolations, prefer_typing_uninitialized_variables
+// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers, avoid_types_as_parameter_names, unnecessary_string_interpolations, prefer_typing_uninitialized_variables, unused_import, unused_field
 import 'package:firebase_auth_app/sqldb.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +65,7 @@ var phone ;
   //   print(posts) ;
   // }
 
-var _valslider = 10.0 ;
+// var _valslider = 10.0 ;
  @override
 initState(){
   pc = new PageController(initialPage: 10);

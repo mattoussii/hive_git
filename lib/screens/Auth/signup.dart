@@ -36,7 +36,6 @@ TextEditingController password = TextEditingController() ;
 
   isloading = false ;
   setState((){});
-
   if (response["status"] == "success"){
     Navigator.of(context).pushNamedAndRemoveUntil("success", (route) => false);
   }else{
@@ -45,8 +44,7 @@ TextEditingController password = TextEditingController() ;
   }else{
     print("signup fail");
   }
-
- }
+}
 
 
   @override

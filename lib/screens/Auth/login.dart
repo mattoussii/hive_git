@@ -28,13 +28,12 @@ TextEditingController password = TextEditingController() ;
  bool isloading = false ;
 
 Login() async{
-
 if(formstate.currentState!.validate()){
   isloading =true ;
   setState(() { });
   var response = await _crud.postRequest(linkLogin,{
     "email":email.text ,
-    "password" :password.text ,
+    "password" :password.text,
    });
   isloading =false ;
   setState(() { });
@@ -56,9 +55,7 @@ if(response["status"] == "success"){
                 fontSize: 18,
                 ),
               ),
-            
             btnOkOnPress: () {},
-            
             ).show();
     }
   }

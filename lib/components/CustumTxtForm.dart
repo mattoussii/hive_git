@@ -22,7 +22,7 @@ class CustumTxtForm extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
         child: TextFormField(
-          
+        
           validator: valid ,
           controller:  mycontroller ,
           decoration: InputDecoration(
