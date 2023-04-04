@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types,// prefer_const_constructors,//prefer_const_literals_to_create_immutables,//use_build_context_synchronously,// avoid_single_cascade_in_expression_statements, //prefer_typing_uninitialized_variables, avoid_print,// non_constant_identifier_names,// depend_on_referenced_packages,, depend_on_referenced_packages, unused_local_variable, prefer_const_constructors, avoid_unnecessary_containers, unnecessary_null_comparison, prefer_const_literals_to_create_immutables, use_build_context_synchronously, unused_import, unused_field, non_constant_identifier_names, prefer_final_fields 
+// ignore_for_file: camel_case_types,// prefer_const_constructors,//prefer_const_literals_to_create_immutables,//use_build_context_synchronously,// avoid_single_cascade_in_expression_statements, //prefer_typing_uninitialized_variables, avoid_print,// non_constant_identifier_names,// depend_on_referenced_packages,, depend_on_referenced_packages, unused_local_variable, prefer_const_constructors, avoid_unnecessary_containers, unnecessary_null_comparison, prefer_const_literals_to_create_immutables, use_build_context_synchronously, unused_import, unused_field, non_constant_identifier_names, prefer_final_fields, sized_box_for_whitespace 
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth_app/components/LinkAPI.dart';
@@ -68,6 +68,8 @@ class _addState extends State<add> {
 
 
 Crud _crud = Crud() ;
+
+File? myfile ;
 
 GlobalKey<FormState> formState =GlobalKey() ;
 final TextEditingController content  = TextEditingController() ;
@@ -226,7 +228,32 @@ bool isloading =false ;
                         ),
                       ),
                     ),
-
+                   Container(height: 20,),
+                   //add file button
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 85),
+                      child: GestureDetector(
+                        onTap: () async {
+                          await showButtomSheet() ;
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration:  BoxDecoration(
+                            color: Colors.green[700],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(child: Text(
+                            'choose image',
+                            style: GoogleFonts.robotoCondensed(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                             ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),
@@ -235,50 +262,61 @@ bool isloading =false ;
   }
 
 
-  // showButtomSheet(){
-  //   return showModalBottomSheet(context: context, builder: (context){
-  //     return Container(
-  //       padding: EdgeInsets.all(20),
-  //       height: 170,
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Text("please choose image",style:  TextStyle(  color:kPrimaryColor ,fontSize: 25,fontWeight: FontWeight.bold),),         
-  //           InkWell(
-  //             onTap: (){
-  //               pickerGallery() ;
-  //             },
-  //             child: Container(
-  //               width: double.infinity,
-  //               padding: EdgeInsets.all(10),
-  //               child: Row(
-  //                 children: [
-  //                   Icon(Icons.photo),
-  //                   SizedBox(width: 20,),
-  //                   Text("from gallery" ,style: TextStyle( fontSize: 20,fontWeight: FontWeight.normal), ),
-  //                 ],
-  //               )
-  //               ),          
-  //           ),
-  //           InkWell(
-  //             onTap: (){
-  //               pickercamera();
-  //             },
-  //             child: Container(
-  //               width: double.infinity,
-  //               padding: EdgeInsets.all(10),
-  //               child: Row(
-  //                 children: [
-  //                   Icon(Icons.camera_alt),
-  //                   SizedBox(width: 20,),
-  //                   Text("from camera", style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal), ),
-  //                 ],
-  //               )),
-  //           ),         
-  //         ],
-  //       )
-  //     );
-  //   }
-  //   );
-  // }
+  showButtomSheet(){
+    return showModalBottomSheet(context: context, builder: (context){
+      return Container(
+        padding: EdgeInsets.all(20),
+        height: 200,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(child: Text("please choose image",style:  TextStyle(  color:kPrimaryColor ,fontSize: 25,fontWeight: FontWeight.bold),)),         
+            SizedBox(height: 20,) ,
+            Container(
+              color: kBackgroundColor,
+              child: InkWell(
+                onTap: ()async {
+                
+                XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+                 myfile = File(xFile!.path) ;
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Icon(Icons.photo),
+                      SizedBox(width: 20,),
+                      Text("from gallery" ,style: TextStyle( fontSize: 20,fontWeight: FontWeight.normal), ),
+                    ],
+                  )
+                  ),          
+              ),
+            ),
+            SizedBox(height: 8,) ,
+            Container(
+              color: kBackgroundColor,
+              child: InkWell(
+                onTap: () async { 
+                  XFile? xFile = await ImagePicker().pickImage(source: ImageSource.camera);
+                  myfile = File(xFile!.path) ;
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Icon(Icons.camera_alt),
+                      SizedBox(width: 20,),
+                      Text("from camera", style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal), ),
+                    ],
+                  )),
+              ),
+            ),         
+          ],
+        )
+      );
+    }
+    );
+  }
 }

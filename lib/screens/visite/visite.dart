@@ -126,39 +126,35 @@ class _visiteScreenState extends State<visiteScreen>{
 
 
 
-class Listnotes extends StatelessWidget{
-  final notes ;
-   Listnotes({this.notes, })  ;
-@override
-Widget build(BuildContext context){
-  return Card(
-    child: Row(
-      children: [
-        Expanded(
-          flex: 1,
-          child: Image.asset("icons/history.png",
-           fit: BoxFit.fill,
-          
-           )
-           ),
-        Expanded(
-           flex: 3,
-          child: ListTile(
-            title: Text( "title") ,
-            subtitle:  Text( "${notes['notes']}") ,
-            // subtitle:ElevatedButton.icon( 
-              
-            //   icon: Icon(Icons.highlight_remove_rounded),
-            //   label: Text('remove'), 
-            //    onPressed: (){}, ),
-               
-            trailing: IconButton(onPressed: (){},
-             icon: Icon(Icons.edit , color:  Colors.black,)),
-              
-            ),
-        ),
-      ],
-    ),
-  ) ;
-}
-}
+// class Listnotes extends StatelessWidget{
+//   final notes ;
+//    Listnotes({this.notes, })  ;
+// @override
+// Widget build(BuildContext context){
+//   return Card(
+//     child: Row(
+//       children: [
+//         Expanded(
+//           flex: 1,
+//           child: Image.asset("icons/history.png",
+//            fit: BoxFit.fill,
+//            )
+//            ),
+//         Expanded(
+//            flex: 3,
+//           child: ListTile(
+//             title: Text( "title") ,
+//             subtitle:  Text( "${notes['notes']}") ,
+//             // subtitle:ElevatedButton.icon(        
+//             //   icon: Icon(Icons.highlight_remove_rounded),
+//             //   label: Text('remove'), 
+//             //    onPressed: (){}, ),       
+//             trailing: IconButton(onPressed: (){},
+//              icon: Icon(Icons.edit , color:  Colors.black,)),             
+//             ),
+//         ),
+//       ],
+//     ),
+//   ) ;
+// }
+// }
