@@ -4,6 +4,7 @@ import 'package:firebase_auth_app/components/LinkAPI.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/crud.dart';
 import 'package:firebase_auth_app/main.dart';
+import 'package:firebase_auth_app/models/visiteModel.dart';
 import 'package:firebase_auth_app/screens/visite/edit.dart';
 import 'package:firebase_auth_app/screens/visite/visiteCard.dart';
 import 'package:flutter/material.dart';
@@ -91,8 +92,9 @@ class _visiteScreenState extends State<visiteScreen>{
                           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
                         edit(visites: snapshot.data['data'][i] ,)));
                         },
-                        title: "${snapshot.data['data'][i]['visite_title']}", 
-                        date: "${snapshot.data['data'][i]['visite_date']}", 
+                        visiteModel: VisiteModel.fromJson(snapshot.data['data'][i]), 
+                        
+                        
                         );
                     }
                     );

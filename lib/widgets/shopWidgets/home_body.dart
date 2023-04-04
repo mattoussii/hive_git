@@ -2,7 +2,7 @@
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/models/product.dart';
 import 'package:firebase_auth_app/screens/shop/shop_details_screen.dart';
-import 'package:firebase_auth_app/widgets/home/product_card.dart';
+import 'package:firebase_auth_app/widgets/shopWidgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 

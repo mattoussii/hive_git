@@ -2,8 +2,8 @@
 
  import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/models/product.dart';
-import 'package:firebase_auth_app/widgets/details/color_dot.dart';
-import 'package:firebase_auth_app/widgets/details/product_image.dart';
+import 'package:firebase_auth_app/widgets/CardDetails/color_dot.dart';
+import 'package:firebase_auth_app/widgets/CardDetails/product_image.dart';
 import 'package:flutter/material.dart';
 
 

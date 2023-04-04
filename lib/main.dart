@@ -12,7 +12,7 @@ import 'package:firebase_auth_app/screens/firebase_auth/login_screen.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/signup_screen.dart';
 import 'package:firebase_auth_app/screens/visite/edit.dart';
 import 'package:firebase_auth_app/screens/visite/visite.dart';
-import 'package:firebase_auth_app/widgets/home/home_body.dart';
+import 'package:firebase_auth_app/widgets/shopWidgets/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
