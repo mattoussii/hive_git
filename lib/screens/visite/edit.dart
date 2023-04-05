@@ -69,7 +69,7 @@ class _editState extends State<edit> {
 
 
 Crud _crud = Crud() ;
-
+File? myfile ;
 GlobalKey<FormState> formState =GlobalKey() ;
 final TextEditingController content  = TextEditingController() ;
 final TextEditingController title = TextEditingController() ;
@@ -80,14 +80,29 @@ bool isloading =false ;
  EditVisites() async {
   if(formState.currentState!.validate()){
     isloading = true ;
-    setState(() {
-    });
-    var response = await _crud.postRequest(linkEditVisite, {
-    "title"   :title.text,
-    "content" : content.text ,
-    "date"    : date.text ,
-    "id"      : widget.visites['visite_id'].toString() ,
+    setState(() {});
+    var response ;
+
+    if(myfile == null){
+    response = await _crud.postRequest(linkEditVisite, {
+    "title"     : title.text,
+    "content"   : content.text ,
+    "date"      : date.text ,
+    "id"        : widget.visites['visite_id'].toString() ,
+    "imagename" : widget.visites['visite_image'].toString() ,
+
   });
+    }else{
+    response = await _crud.postRequestwithFile(linkEditVisite, {
+    "title"     : title.text,
+    "content"   : content.text ,
+    "date"      : date.text ,
+    "imagename" : widget.visites['visite_image'].toString() ,
+    "id"        : widget.visites['visite_id'].toString() ,
+  },myfile!);
+    }
+
+
     isloading = false ;
     setState(() {  
     });
@@ -210,6 +225,32 @@ bool isloading =false ;
 
                   Container(height: 20,),
 
+                   Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 85),
+                      child: GestureDetector(
+                        
+                        onTap: ()  {
+                         showButtomSheet();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration:  BoxDecoration(
+                            color: myfile == null ? Colors.black :Colors.green[700],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(child: Text(
+                            'add image',
+                            style: GoogleFonts.robotoCondensed(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                             ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(height: 20,),
                    //add button
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 85),
@@ -243,51 +284,72 @@ bool isloading =false ;
     );
   }
 
+  showButtomSheet(){
+    return showModalBottomSheet(context: context, builder: (context){
+      return Container(
+        padding: EdgeInsets.all(20),
+        height: 200,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(child: Text("please choose image",style:  TextStyle(  color:kPrimaryColor ,fontSize: 25,fontWeight: FontWeight.bold),)),         
+            SizedBox(height: 20,) ,
+            Container(
+              color: kBackgroundColor,
+              child: InkWell(
+                onTap: ()async {
+                
+                XFile? xFile = await ImagePicker().pickImage(
+                  source: ImageSource.gallery);
+                  Navigator.of(context).pop();
+                  myfile = File(xFile!.path) ;
+                  setState(() {                 
+                  });   
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Icon(Icons.photo),
+                      SizedBox(width: 20,),
+                      Text("from gallery" ,style: TextStyle( fontSize: 20,fontWeight: FontWeight.normal), ),
+                    ],
+                  )
+                  ),          
+              ),
+            ),
+            SizedBox(height: 8,) ,
+            Container(
+              color: kBackgroundColor,
+              child: InkWell(
+                onTap: () async { 
+                  XFile? xFile = await ImagePicker().pickImage(
+                    source: ImageSource.camera);
+                    Navigator.of(context).pop();
+                    myfile = File(xFile!.path) ;
+                    setState(() {
+                      
+                    });                
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Icon(Icons.camera_alt),
+                      SizedBox(width: 20,),
+                      Text("from camera", style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal), ),
+                    ],
+                  )
+                  ),
+              ),
+            ),         
+          ],
+        )
+      );
+    }
+    );
+  }
 
-  // showButtomSheet(){
-  //   return showModalBottomSheet(context: context, builder: (context){
-  //     return Container(
-  //       padding: EdgeInsets.all(20),
-  //       height: 170,
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Text("please choose image",style:  TextStyle(  color:kPrimaryColor ,fontSize: 25,fontWeight: FontWeight.bold),),         
-  //           InkWell(
-  //             onTap: (){
-  //               pickerGallery() ;
-  //             },
-  //             child: Container(
-  //               width: double.infinity,
-  //               padding: EdgeInsets.all(10),
-  //               child: Row(
-  //                 children: [
-  //                   Icon(Icons.photo),
-  //                   SizedBox(width: 20,),
-  //                   Text("from gallery" ,style: TextStyle( fontSize: 20,fontWeight: FontWeight.normal), ),
-  //                 ],
-  //               )
-  //               ),          
-  //           ),
-  //           InkWell(
-  //             onTap: (){
-  //               pickercamera();
-  //             },
-  //             child: Container(
-  //               width: double.infinity,
-  //               padding: EdgeInsets.all(10),
-  //               child: Row(
-  //                 children: [
-  //                   Icon(Icons.camera_alt),
-  //                   SizedBox(width: 20,),
-  //                   Text("from camera", style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal), ),
-  //                 ],
-  //               )),
-  //           ),         
-  //         ],
-  //       )
-  //     );
-  //   }
-  //   );
-  // }
 }

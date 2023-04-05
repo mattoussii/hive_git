@@ -1,9 +1,10 @@
 
-// ignore_for_file: avoid_print, unused_local_variable, depend_on_referenced_packages, prefer_const_constructors
-import 'dart:io';
+// ignore_for_file: avoid_print, prefer_const_constructors, depend_on_referenced_packages
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:path/path.dart';
+import 'dart:io';
 
 class Crud {
 
@@ -38,11 +39,11 @@ class Crud {
  
 
 
-   postRequestwithFile(String url ,Map data ,File file) async{
+   postRequestwithFile(String url , Map data , File file) async{
     var request =http.MultipartRequest("POST" , Uri.parse(url)) ;
-    var lengh   = await file.length() ;
+    var length   = await file.length() ;
      var stream = http.ByteStream(file.openRead());
-    var multipartFile =http.MultipartFile("file",lengh as Stream<List<int>> , stream as int ,
+    var multipartFile =http.MultipartFile("file" , stream ,length ,
     filename: basename(file.path));
     request.files.add(multipartFile);
     //request dinamique title/content/date ...

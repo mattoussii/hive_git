@@ -5,7 +5,6 @@ import 'package:firebase_auth_app/components/LinkAPI.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/crud.dart';
 import 'package:firebase_auth_app/main.dart';
-
 import 'package:firebase_auth_app/screens/visite/visite.dart';
 import 'package:firebase_auth_app/sqldb.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +16,12 @@ import 'package:intl/intl.dart'; // for date formatting
 
 
 class add extends StatefulWidget {
-  const add({super.key});
+  const add({Key? key}) : super(key: key);
   @override
   State<add> createState() => _addState();
 }
 
-class _addState extends State<add> {
+class _addState extends State<add>  {
 
    //Position? cl ;
   // Future getPositon() async {
@@ -52,19 +51,8 @@ class _addState extends State<add> {
   // Future<Position> getLatAndLong() async {
   //   return await Geolocator.getCurrentPosition().then((value) =>  value);
   // }
-  // File ? _file ;
-  // Future pickercamera() async{
-  //   final myfile = await ImagePicker().pickImage(source: ImageSource.camera);
-  //   setState(() {
-  //     _file = File(myfile!.path);
-  //   });
-  // }
-  // Future pickerGallery() async{
-  //   final myfile = await ImagePicker().pickImage(source: ImageSource.gallery);
-  //   setState(() {
-  //     _file = File(myfile!.path);
-  //   });
-  // }
+  
+
 
 
 Crud _crud = Crud() ;
@@ -114,6 +102,8 @@ bool isloading =false ;
   }
   }
  }
+  
+  
   @override
   Widget build(BuildContext context) {    
     var time = DateTime.now() ;
@@ -126,12 +116,14 @@ bool isloading =false ;
       : Container(
         padding: EdgeInsets.all(10),
         child: Form(
+          
           key: formState,
           child: ListView(
             children: [
 
                    //title  
                   TextFormField(
+                     
                       validator: (text){
                         if (text!.isEmpty){
                           return "this field can't be empty";
@@ -172,6 +164,7 @@ bool isloading =false ;
 
                   ///time
                   TextFormField(
+                     
                     validator: (text){
                         if (text!.isEmpty){
                           return "this field can't be empty";
@@ -218,7 +211,35 @@ bool isloading =false ;
                 //   ),
 
                   Container(height: 20,),
+                     
+                   //add image button
+                     Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 85),
+                      child: GestureDetector(
+                        
+                        onTap: ()  {
+                         showButtomSheet();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration:  BoxDecoration(
+                            color: myfile == null ? Colors.black :Colors.green[700],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(child: Text(
+                            'add image',
+                            style: GoogleFonts.robotoCondensed(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                             ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
 
+                    Container(height: 20,),
                    //add button
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 85),
@@ -244,32 +265,7 @@ bool isloading =false ;
                         ),
                       ),
                     ),
-                   Container(height: 20,),
-                   //add file button
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 85),
-                      child: GestureDetector(
-                        onTap: () async {
-                          await showButtomSheet() ;
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          decoration:  BoxDecoration(
-                            color: Colors.green[700],
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Center(child: Text(
-                            'choose image',
-                            style: GoogleFonts.robotoCondensed(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                             ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                  
             ],
           ),
         ),
@@ -293,8 +289,14 @@ bool isloading =false ;
               child: InkWell(
                 onTap: ()async {
                 
-                XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-                 myfile = File(xFile!.path) ;
+                XFile? xFile = await ImagePicker().pickImage(
+                  source: ImageSource.gallery);
+                  Navigator.of(context).pop();
+                  myfile = File(xFile!.path) ;
+                  setState(() {
+                    
+                  });
+                 
                 },
                 child: Container(
                   width: double.infinity,
@@ -314,8 +316,15 @@ bool isloading =false ;
               color: kBackgroundColor,
               child: InkWell(
                 onTap: () async { 
-                  XFile? xFile = await ImagePicker().pickImage(source: ImageSource.camera);
-                  myfile = File(xFile!.path) ;
+                  XFile? xFile = await ImagePicker().pickImage(
+                    source: ImageSource.camera);
+                    Navigator.of(context).pop();
+                    myfile = File(xFile!.path) ;
+                    setState(() {
+                      
+                    });
+                  
+                  
                 },
                 child: Container(
                   width: double.infinity,
@@ -326,7 +335,8 @@ bool isloading =false ;
                       SizedBox(width: 20,),
                       Text("from camera", style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal), ),
                     ],
-                  )),
+                  )
+                  ),
               ),
             ),         
           ],
