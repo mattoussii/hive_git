@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types,// prefer_const_constructors,//prefer_const_literals_to_create_immutables,//use_build_context_synchronously,// avoid_single_cascade_in_expression_statements, //prefer_typing_uninitialized_variables, avoid_print,// non_constant_identifier_names,// depend_on_referenced_packages,, depend_on_referenced_packages, unused_local_variable, prefer_const_constructors, avoid_unnecessary_containers, unnecessary_null_comparison, prefer_const_literals_to_create_immutables, use_build_context_synchronously, unused_import, unused_field, non_constant_identifier_names, prefer_final_fields, sized_box_for_whitespace 
+// ignore_for_file: camel_case_types,// prefer_const_constructors,//prefer_const_literals_to_create_immutables,//use_build_context_synchronously,// avoid_single_cascade_in_expression_statements, //prefer_typing_uninitialized_variables, avoid_print,// non_constant_identifier_names,// depend_on_referenced_packages,, depend_on_referenced_packages, unused_local_variable, prefer_const_constructors, avoid_unnecessary_containers, unnecessary_null_comparison, prefer_const_literals_to_create_immutables, use_build_context_synchronously, unused_import, unused_field, non_constant_identifier_names, prefer_final_fields, sized_box_for_whitespace, empty_statements, curly_braces_in_flow_control_structures 
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth_app/components/LinkAPI.dart';
@@ -79,16 +79,32 @@ final TextEditingController date = TextEditingController() ;
 bool isloading =false ;
 
  AddVisites() async {
+  if(myfile == null ) 
+  return AwesomeDialog(
+            context: context,
+            dialogType: DialogType.warning,
+            animType: AnimType.rightSlide,
+            body:  Text(
+              'please add photo related to visite ' ,
+              style: GoogleFonts.robotoCondensed(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                ),
+              ),
+            btnOkOnPress: () {},
+            ).show(); 
+
   if(formState.currentState!.validate()){
     isloading = true ;
     setState(() {
     });
-    var response = await _crud.postRequest(linkAddVisite, {
+    var response = await _crud.postRequestwithFile(linkAddVisite, {
     "title"   :title.text,
     "content" : content.text ,
     "date"    : date.text ,
     "id"      : sharedPref.getString("id"),
-  });
+  }, myfile! );
     isloading = false ;
     setState(() {  
     });

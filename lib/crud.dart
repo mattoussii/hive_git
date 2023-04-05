@@ -1,12 +1,13 @@
-// ignore_for_file: empty_catches, unused_import, avoid_print, prefer_const_constructors
 
+// ignore_for_file: avoid_print, unused_local_variable, depend_on_referenced_packages, prefer_const_constructors
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:path/path.dart';
 
 class Crud {
 
   getRequest(String url) async {
-    
     try{
       var response =await http.get(Uri.parse(url) ) ;
       if(response.statusCode == 200){
@@ -20,7 +21,7 @@ class Crud {
     }
   }
 
-    postRequest(String url ,Map data) async {
+  postRequest(String url ,Map data) async {
       await Future.delayed(Duration(seconds: 1)) ;
     try{
       var response =await http.post(Uri.parse(url), body: data ) ;
@@ -35,4 +36,29 @@ class Crud {
     }
   }
  
+
+
+   postRequestwithFile(String url ,Map data ,File file) async{
+    var request =http.MultipartRequest("POST" , Uri.parse(url)) ;
+    var lengh   = await file.length() ;
+     var stream = http.ByteStream(file.openRead());
+    var multipartFile =http.MultipartFile("file",lengh as Stream<List<int>> , stream as int ,
+    filename: basename(file.path));
+    request.files.add(multipartFile);
+    //request dinamique title/content/date ...
+    data.forEach((key, value) {
+      request.fields[key] =value ;
+    });
+    var myrequest = await request.send() ;
+
+    var response  = await http.Response.fromStream(myrequest) ;
+    if(myrequest.statusCode == 200){
+      return jsonDecode(response.body);
+    }else{
+      print('Error ${myrequest.statusCode}');
+    }
+   }
+
+
+
 }
