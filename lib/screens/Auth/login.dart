@@ -95,17 +95,17 @@ if(response["status"] == "success"){
                     
                     
                     CustumTxtForm(
-                      hint: 'email', 
+                      hint: 'e-mail', 
                       mycontroller: email,
                         valid: (val) { 
-                          return validInput(val!, 5, 20) ;
+                          return validInput(val!, 5, 30) ;
                          },
                       ),
 
                      SizedBox(height: 10,),  
 
                     CustumTxtForm(
-                      hint: 'password',
+                      hint: 'mot de passe',
                       mycontroller: password,
                         valid: (val) { 
                           return validInput(val!, 3, 30) ;
@@ -127,7 +127,7 @@ if(response["status"] == "success"){
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(child: Text(
-                            'Sign in',
+                            'se connecter',
                             style: GoogleFonts.robotoCondensed(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ if(response["status"] == "success"){
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Not yet a menber ? ',
+                          'Pas encore  membre ? ',
                            style: GoogleFonts.robotoCondensed(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,)       
@@ -153,7 +153,7 @@ if(response["status"] == "success"){
                         GestureDetector(
                           onTap:  (){Navigator.of(context).pushNamed("signup") ;},
                           child: Text(
-                            'Sign up Now',
+                            "s'inscrire maintenant",
                               style: GoogleFonts.robotoCondensed(
                               color: Colors.amber[900],
                               fontWeight: FontWeight.bold,

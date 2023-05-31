@@ -33,7 +33,6 @@ TextEditingController password = TextEditingController() ;
     "email" : email.text ,
     "password" : password.text ,
   });
-
   isloading = false ;
   setState((){});
   if (response["status"] == "success"){
@@ -76,7 +75,7 @@ TextEditingController password = TextEditingController() ;
                     Image.asset("images/bee.png", width: 200 ,height: 200,),
                    
                     CustumTxtForm(
-                      hint: 'username',
+                      hint: "nom d'utilisateur",
                        mycontroller: username,
                         valid: (val) { 
                           return validInput(val!, 3, 20) ;
@@ -85,7 +84,7 @@ TextEditingController password = TextEditingController() ;
                      SizedBox(height: 10,),  
                    
                     CustumTxtForm(
-                      hint: 'email',
+                      hint: 'e-mail',
                        mycontroller: email, 
                        valid: (val) { 
                         return validInput(val!, 5, 30) ;
@@ -94,7 +93,7 @@ TextEditingController password = TextEditingController() ;
                      SizedBox(height: 10,),  
                   
                     CustumTxtForm(
-                      hint: 'password',
+                      hint: 'mot de passe',
                        mycontroller: password,
                         valid: (val ) {  
                           return validInput(val!, 3, 20) ;
@@ -114,7 +113,7 @@ TextEditingController password = TextEditingController() ;
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(child: Text(
-                            'Sign up',
+                            "s'inscrire",
                             style: GoogleFonts.robotoCondensed(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -132,7 +131,7 @@ TextEditingController password = TextEditingController() ;
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Already a menber ! ',
+                          "Déjà membre ! ",
                            style: GoogleFonts.robotoCondensed(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,)       
@@ -140,7 +139,7 @@ TextEditingController password = TextEditingController() ;
                         GestureDetector(
                           onTap:  (){Navigator.of(context).pushNamed("login") ;},
                           child: Text(
-                            'Sign in Here',
+                            "connectez-vous ici",
                               style: GoogleFonts.robotoCondensed(
                               color: Colors.amber[900],
                               fontWeight: FontWeight.bold,

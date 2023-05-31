@@ -32,13 +32,26 @@ class _successState extends State<success> {
             Center(
               child:  
               Text(
-                "you are a menber now! you can  sign in",
+                "vous êtes membre maintenant! ",
                 style: GoogleFonts.robotoCondensed(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                   ),
                 ), 
+                
+              ),
+              Center(
+              child:  
+              Text(
+                "vous pouvez vous connecter",
+                style: GoogleFonts.robotoCondensed(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  ),
+                ), 
+                
               ),
  
             SizedBox(height: 20,),  
@@ -56,7 +69,7 @@ class _successState extends State<success> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(child: Text(
-                            'Login',
+                            'se connecter',
                             style: GoogleFonts.robotoCondensed(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,

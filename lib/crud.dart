@@ -1,14 +1,26 @@
 
-// ignore_for_file: avoid_print, prefer_const_constructors, depend_on_referenced_packages
+// ignore_for_file: avoid_print, prefer_const_constructors, depend_on_referenced_packages, prefer_interpolation_to_compose_strings
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:path/path.dart';
 import 'dart:io';
 
+
+String _basicAuth = 'Basic ' +
+    base64Encode(utf8.encode(
+        'aymen mattoussi:123456'));
+  
+    Map<String, String> myheaders = {
+          'authorization': _basicAuth
+        };
+
+
+
+
 class Crud {
 
-  getRequest(String url) async {
+   getRequest(String url) async {
     try{
       var response =await http.get(Uri.parse(url) ) ;
       if(response.statusCode == 200){
@@ -22,10 +34,11 @@ class Crud {
     }
   }
 
-  postRequest(String url ,Map data) async {
-      await Future.delayed(Duration(seconds: 1)) ;
+
+   postRequest(String url ,Map data) async {
+      // await Future.delayed(Duration(seconds: 1)) ;
     try{
-      var response =await http.post(Uri.parse(url), body: data ) ;
+      var response =await http.post(Uri.parse(url), body: data ,headers: myheaders ) ;
       if(response.statusCode == 200){
         var responsebody = jsonDecode(response.body);
         return responsebody ;
@@ -38,18 +51,21 @@ class Crud {
   }
  
 
-
-   postRequestwithFile(String url , Map data , File file) async{
+   postRequestwithFile(String url , Map data , File file ) async{
+    
     var request =http.MultipartRequest("POST" , Uri.parse(url)) ;
     var length   = await file.length() ;
-     var stream = http.ByteStream(file.openRead());
+    var stream = http.ByteStream(file.openRead());
     var multipartFile =http.MultipartFile("file" , stream ,length ,
+   
     filename: basename(file.path));
+    request.headers.addAll(myheaders);
     request.files.add(multipartFile);
     //request dinamique title/content/date ...
     data.forEach((key, value) {
       request.fields[key] =value ;
     });
+
     var myrequest = await request.send() ;
 
     var response  = await http.Response.fromStream(myrequest) ;

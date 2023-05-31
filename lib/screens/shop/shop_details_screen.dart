@@ -33,7 +33,7 @@ class DetailsScreen extends StatelessWidget {
         padding: EdgeInsets.only(right:kDefaultPadding ),
         icon: Icon(
           Icons.arrow_back,
-          color: Colors.white,
+          color: Colors.black,
           ),
         onPressed: (){
           Navigator.pop(context);
@@ -41,9 +41,9 @@ class DetailsScreen extends StatelessWidget {
       ),
       centerTitle: false,
       title: Text(
-        'return',
+        'retour',
          style: GoogleFonts.robotoCondensed(
-                    fontSize: 20,fontWeight: FontWeight.bold, color: Colors.black,
+                    fontSize: 20, color: Colors.black,
                   ),
        ),
 

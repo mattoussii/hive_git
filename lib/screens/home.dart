@@ -1,12 +1,9 @@
-
-
-
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_single_cascade_in_expression_statements, prefer_const_literals_to_create_immutables,, unused_import 
-
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_single_cascade_in_expression_statements, prefer_const_literals_to_create_immutables,, unused_import, unused_field 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_app/components/LinkAPI.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/main.dart';
-
+import 'package:firebase_auth_app/screens/Map.dart';
 import 'package:firebase_auth_app/screens/visite/visite.dart';
 import 'package:firebase_auth_app/screens/history.dart';
 import 'package:firebase_auth_app/screens/scanner_screen/scanner.dart';
@@ -15,7 +12,8 @@ import 'package:firebase_auth_app/screens/gallery.dart';
 import 'package:firebase_auth_app/screens/help.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 class HomeScreen extends StatefulWidget {
@@ -27,10 +25,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   
-  // final user = FirebaseAuth.instance.currentUser!;
+  //  final user = FirebaseAuth.instance.currentUser!;
+
+
+
   @override
   Widget build(BuildContext context) {
-   
    return Stack( 
     // <-- STACK AS THE SCAFFOLD PARENT
       children: [
@@ -67,12 +67,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         backgroundImage: AssetImage('images/a.jpg'),
                       ),
                       SizedBox(height: 10,),
-                      Text('HELLO',
+                      Text('bonjour',
                         style: GoogleFonts.robotoCondensed(
                               fontSize: 15,fontWeight: FontWeight.bold, color: Colors.black,
                               ),
                       ),
-                        Text("welcome back",
+                        Text(" bienvenue",
                         style: GoogleFonts.robotoCondensed(
                               fontSize: 15,fontWeight: FontWeight.normal, color: Colors.black,
                               ),
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   ListTile(
-                    title: const Text('shop screen'),
+                    title: const Text('boutique'),
                     leading:  Icon(
                                   Icons.shop_2_outlined
                                 ),
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const Divider(color: kPrimaryColor),      
                   ListTile(
-                    title: const Text('gallery'),
+                    title: const Text('photos'),
                     leading:  Icon(
                                   Icons.photo
                                 ),
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       
                                   Navigator.pop(context);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context)=>Test()
+                        builder: (context)=>Gallery()
                         ));
                       
                     },
@@ -128,14 +128,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const Divider(color: kPrimaryColor),
                   ListTile(
-                    title: const Text('visite'),
+                    title: const Text('ruche'),
                     leading:  Icon(
                                   Icons.check
                                 ),
                     onTap: () {
                         Navigator.pop(context);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context)=>helpscreen()
+                        builder: (context)=>visiteScreen()
                         ));
                       
                     },
@@ -157,14 +157,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const Divider(color: kPrimaryColor),
                   ListTile(
-                    title: const Text('help'),
+                    title: const Text('contact'),
                     leading:  Icon(
                                   Icons.help
                                 ),
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context)=>visiteScreen()
+                        builder: (context)=>helpscreen()
+                        ));
+                      
+                    },
+                  ),
+                   const Divider(color: kPrimaryColor),
+                  ListTile(
+                    title: const Text('carte'),
+                    leading:  Icon(
+                                  Icons.map_rounded
+                                ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context)=>Map_screen()
                         ));
                       
                     },
@@ -191,25 +205,16 @@ class _HomeScreenState extends State<HomeScreen> {
          child: Column(            
           children: [
             const Text(
-              'Hello, you\'re signed in',
+              "bonjour, vous êtes connecté",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold, 
                 color: Colors.white,
-                ), 
+                ),              
+              ),   
               
-              
-              ),
-                  // Text(
-              // // user.email!,
-              // style: TextStyle(
-              //     fontSize: 18,
-              //     fontWeight: FontWeight.bold, 
-              //     color: Colors.white54,
-              //     ), 
-              
-              //  ),
-             SizedBox(height: 75),
+                  
+          SizedBox(height: 75),
        // first row  pages shop and gallery 
             Row(
               children: [
@@ -238,10 +243,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Icon(Icons.shop_2_rounded,
-                                color: Colors.white,), // <-- Icon
-                                Text("shop",
+                                color: Colors.black,), // <-- Icon
+                                Text("boutique",
                                                           style: GoogleFonts.robotoCondensed(
-                                              color: Colors.white54,
+                                              color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                                   )), // <-- Text
@@ -263,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             splashColor: Colors.amber, 
        
                             onTap: () {  Navigator.push(context,
-                                 MaterialPageRoute(builder: (context) =>Test()),
+                                 MaterialPageRoute(builder: (context) =>Gallery()),
                                     ); }, 
        
        
@@ -271,10 +276,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Icon(Icons.photo_camera,
-                                color: Colors.white,), // <-- Icon
-                                Text("gallery",
+                                color: Colors.black,), // <-- Icon
+                                Text("photos",
                                                           style: GoogleFonts.robotoCondensed(
-                                              color: Colors.white54,
+                                              color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                                   )), // <-- Text
@@ -308,10 +313,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Icon(Icons.qr_code_2_rounded,
-                                color: Colors.white,), // <-- Icon
+                                color: Colors.black,), // <-- Icon
                                 Text("scanner",
                                                           style: GoogleFonts.robotoCondensed(
-                                              color: Colors.white54,
+                                              color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                                   )), // <-- Text
@@ -371,11 +376,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Icon(Icons.note_add_rounded,
-                                      color: Colors.white,), // <-- Icon
-                                      Text("visite",
+                                      Icon(Icons.hive_rounded,
+                                      color: Colors.black,), // <-- Icon
+                                      Text("ruche",
                                                                 style: GoogleFonts.robotoCondensed(
-                                                    color: Colors.white54,
+                                                    color: Colors.black,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 18,
                                                         )), // <-- Text
@@ -409,10 +414,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Icon(Icons.history,
-                                color: Colors.white,), // <-- Icon
-                                Text("history",
+                                color: Colors.black,), // <-- Icon
+                                Text("historique",
                                                           style: GoogleFonts.robotoCondensed(
-                                              color: Colors.white54,
+                                              color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                                   )), // <-- Text
@@ -441,10 +446,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Icon(Icons.help_rounded,
-                                color: Colors.white,), // <-- Icon
-                                Text("help ",
+                                color: Colors.black,), // <-- Icon
+                                Text("contact ",
                                                           style: GoogleFonts.robotoCondensed(
-                                              color: Colors.white54,
+                                              color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18,
                                                   )), // <-- Text
@@ -452,50 +457,94 @@ class _HomeScreenState extends State<HomeScreen> {
         
             ],
             ),
-       // last row  sign out button 
-            SizedBox(height: 50),
-          Row(
-            children: [
-                Expanded(
-                  child: Container(
-                  alignment: Alignment.bottomCenter,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: kDefaultPadding,
-                      vertical: kDefaultPadding ,
-                    ),
-                      child: SizedBox.fromSize(
-                          size: Size(90, 90),
-                          child: ClipOval(
-                            child: Material(
-                              color: Colors.green,
-                              child: InkWell(
-                                    splashColor: Colors.amber, 
-                                    onTap: () {
-                                      sharedPref.clear() ;
-                                      Navigator.of(context).pushNamedAndRemoveUntil("login", (route) => false);
-                                    }, 
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(Icons.logout_rounded,
-                                        color: Colors.white,), // <-- Icon
-                                        Text("log out",
-                                                                  style: GoogleFonts.robotoCondensed(
-                                                      color: Colors.white,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 18,
-                                                          )), // <-- Text
-                                      ],
-                                    ),
+
+          
+      //third row logout  and google map page        
+            Row(
+              children: [
+                  Expanded(
+                    child: Container(
+                    alignment: Alignment.bottomCenter,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: kDefaultPadding,
+                        vertical: kDefaultPadding ,
+                      ),
+                        child: SizedBox.fromSize(
+                            size: Size(90, 90),
+                            child: ClipOval(
+                              child: Material(
+                                color: Colors.green,
+                                child: InkWell(
+                                      splashColor: Colors.amber, 
+                                      onTap: () {
+                                        sharedPref.clear() ;
+                                        Navigator.of(context).pushNamedAndRemoveUntil("map", (route) => false);
+                                      }, 
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(Icons.map_rounded,
+                                          color: Colors.black,), // <-- Icon
+                                          Text("carte",
+                                           style: GoogleFonts.robotoCondensed(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                                            )), // <-- Text
+                                        ],
+                                      ),
+                                ),
                               ),
                             ),
-                          ),
-              ),
-                    ),
-                    
                 ),
-            ],
-          ),
+                      ),
+                      
+                  ),
+                  
+                  Expanded(
+                    child: Container(
+                    alignment: Alignment.bottomCenter,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: kDefaultPadding,
+                        vertical: kDefaultPadding ,
+                      ),
+                        child: SizedBox.fromSize(
+                            size: Size(90, 90),
+                            child: ClipOval(
+                              child: Material(
+                                color: Colors.green,
+                                child: InkWell(
+                                      splashColor: Colors.amber, 
+                                      onTap: () {
+                                        sharedPref.clear() ;
+                                        Navigator.of(context).pushNamedAndRemoveUntil("login", (route) => false);
+                                      }, 
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(Icons.logout_rounded,
+                                          color: Colors.black,), // <-- Icon
+                                          Text("sign out",
+                                                                    style: GoogleFonts.robotoCondensed(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 18,
+                                                            )), // <-- Text
+                                        ],
+                                      ),
+                                ),
+                              ),
+                            ),
+                ),
+                      ),
+                      
+                  ),
+              
+              
+              
+              
+              ],
+            ),
 
  ],),),), ] ); } 
 
@@ -508,7 +557,7 @@ class _HomeScreenState extends State<HomeScreen> {
        backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
-        'home',
+        "page d'accueil",
          style: GoogleFonts.robotoCondensed(
                     fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
                   ),),

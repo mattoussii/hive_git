@@ -1,4 +1,5 @@
 // ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers, avoid_types_as_parameter_names, unnecessary_string_interpolations, prefer_typing_uninitialized_variables, unused_import, unused_field
+import 'package:firebase_auth_app/screens/home.dart';
 import 'package:firebase_auth_app/sqldb.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -50,51 +51,38 @@ PageController? pc;
 GlobalKey<FormState> formState = new GlobalKey<FormState>();
 var username ;
 var phone ;
-
-
   List posts = [];
   // Future getPost() async {
-  //   var  url = "https://jsonplaceholder.typicode.com/posts" ;
-    
+  //   var  url = "https://jsonplaceholder.typicode.com/posts" ;  
   //   var response = await http.get(Uri.parse(url));
-  //   var respnsebody = jsonDecode(response.body);
-    
+  //   var respnsebody = jsonDecode(response.body);  
   //   setState(() {
   //     posts.addAll(respnsebody) ;
   //   });
   //   print(posts) ;
   // }
-
 // var _valslider = 10.0 ;
- @override
-initState(){
-  pc = new PageController(initialPage: 10);
-  super.initState();
-  // getPost();
-}
+//  @override
+// initState(){
+//   pc = new PageController(initialPage: 10);
+//   super.initState();
+//    getPost();
+// }
+// SqlDb slqdb = SqlDb() ;
 
 
-
-
-SqlDb slqdb = SqlDb() ;
-
-
-
+final TextEditingController content  = TextEditingController() ;
+final TextEditingController title = TextEditingController() ;
 
 @override
 Widget build(BuildContext context) {
-	return Scaffold(
-    backgroundColor:kBackgroundColor ,
-    appBar: AppBar(
-      actions: [
-        IconButton(onPressed: (){
-          
-        }, icon: Icon(Icons.search_rounded))
-      ],  
+	return Scaffold( 
+      backgroundColor: Color.fromARGB(255, 215, 222, 228),
+      appBar: AppBar(
       backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
-        'help',
+        'contact ',
          style: GoogleFonts.robotoCondensed(
                    fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
                   ),),
@@ -106,20 +94,206 @@ Widget build(BuildContext context) {
           color: Colors.black,
           ),
         onPressed: (){
-          Navigator.pop(context);
+         
+          Navigator.of(context).push(MaterialPageRoute(
+          builder: (context)=>HomeScreen() 
+          ));
         },
       ),
 
     ),
-	  body:  SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+       body:
+       SafeArea(   
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Image.asset('icons/help.png',
+                height: 100,), 
+                SizedBox(height :10),
+                Text(
+                  'Entrez en contact avec moi !',
+                  style: GoogleFonts.robotoCondensed(
+                    fontSize: 20,fontWeight: FontWeight.bold, color: Colors.black,
+                  ),
+                  ),
+               SizedBox(height: 50,),
+                 Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                   child: TextFormField(         
+                                keyboardType: TextInputType.emailAddress,
+                              maxLines: 1,
+                               decoration: InputDecoration(              
+                                 enabled: true,
+                                 disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 3 ,                   
+                    )
+                                 ),       
+                                 enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(
+                      color: Colors.green,
+                      width: 3 ,                   
+                    )
+                                 ),       
+                                 focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 3 ,                    
+                    )
+                                 ),        
+                                 hintText: "tapez votre nom...",
+                                 hintStyle: TextStyle(color: Colors.blue),
+                                 prefixIcon: Icon(Icons.person , color: Colors.green,),        
+                               ),         
+                             ),
+                 ),
+                SizedBox(height :20), 
+                Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: TextFormField(         
+                               keyboardType: TextInputType.emailAddress,
+                              maxLines: 1,
+                              decoration: InputDecoration(              
+                  enabled: true,
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 3 ,                   
+                    )
+                  ),       
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(
+                      color: Colors.green,
+                      width: 3 ,                   
+                    )
+                  ),       
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 3 ,                    
+                    )
+                  ),        
+                  hintText: "tapez votre e-mail ...",
+                  hintStyle: TextStyle(color: Colors.blue),
+                  prefixIcon: Icon(Icons.email , color: Colors.green,),          
+                              ),         
+                            ),
+                ),
+                SizedBox(height :20),
+                Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: TextFormField(   
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1, 
+                      maxLines: 5,      
+                   decoration: InputDecoration(              
+                  enabled: true,
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 3 ,                   
+                    )
+                  ),       
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(
+                      color: Colors.green,
+                      width: 3 ,                   
+                    )
+                  ),       
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(22),
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 3 ,                    
+                    )
+                  ),        
+                  hintText: "tapez vos commentaires /suggestion / etc ..." , 
+                  
+                  hintStyle: TextStyle(color: Colors.blue),
+                  prefixIcon: Icon(Icons.comment , color: Colors.green,),  
+                        
+                              ),         
+                            ),
+                ),
+                 SizedBox(height :50),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 85),
+                      child: GestureDetector(
+                        onTap: () async{
+                          
+
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration:  BoxDecoration(
+                            color: Colors.green[700],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(child: Text(
+                            'envoyer',
+                            style: GoogleFonts.robotoCondensed(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                             ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                  ),
+          )
+
+    )
+       ),
+       
+       );
+  // Scaffold(
+  //   backgroundColor:kBackgroundColor ,
+  //   appBar: AppBar(
+  //     actions: [
+  //       IconButton(onPressed: (){      
+  //       }, icon: Icon(Icons.search_rounded))
+  //     ],  
+  //     backgroundColor: kPrimaryColor,
+  //     elevation: 0,
+  //     title: Text(
+  //       'help',
+  //        style: GoogleFonts.robotoCondensed(
+  //                  fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
+  //                 ),),
+  //     centerTitle: false,
+  //        leading: IconButton(
+  //       padding: const EdgeInsets.only(right:kDefaultPadding ),
+  //       icon: const Icon(
+  //         Icons.arrow_back,
+  //         color: Colors.black,
+  //         ),
+  //       onPressed: (){
+  //         Navigator.pop(context);
+  //       },
+  //     ),
+  //   ),
+	//   body:  SingleChildScrollView(
+  //     physics: BouncingScrollPhysics(),
 //       child: Padding(
 //        padding: const EdgeInsets.symmetric(vertical: 30 ,  horizontal: 10),
 //        child:
 //         Column(
 //         mainAxisAlignment: MainAxisAlignment.start,
-//         children: [
-  
+//         children: [ 
 // //dropDownMenu Buttons           
 //           Container(
 //             color: Color.fromARGB(255, 213, 212, 212),
@@ -128,8 +302,7 @@ Widget build(BuildContext context) {
 //                     icon: const Icon(
 //                       Icons.hive_rounded,
 //                       color: Colors.yellow,
-//                       ),	
-                    
+//                       ),	                  
 //                     // Array list of items
 //                     items: items.map((String items) {
 //             return DropdownMenuItem(        
@@ -152,10 +325,8 @@ Widget build(BuildContext context) {
 //             fontSize: 20,fontWeight: FontWeight.w100, color: Colors.black,
 //               )),
 //           ),         
-//           SizedBox(height: 40,),
-  
+//           SizedBox(height: 40,)
 // //checkbox buttons 
-  
 //           Column(
 //             children:[
 //                 Text("choose item",
@@ -174,8 +345,7 @@ Widget build(BuildContext context) {
 //                             });
 //                             },),
 //                           ],
-//                         ),
-         
+//                         ),       
 //            Row(
 //                   children: [
 //                     Text("item2",
@@ -205,7 +375,6 @@ Widget build(BuildContext context) {
 //             ]
 //           ),          
 //           SizedBox(height: 20,),
-  
 // //radio buttons
 //           Column( 
 //            children: [
@@ -301,12 +470,10 @@ Widget build(BuildContext context) {
 //                     TextButton(onPressed: (){
 //                       Navigator.of(context).pop();
 //                     }, child: Text('OK')),
-
 //                     TextButton(onPressed: (){
 //                       Navigator.of(context).pop();
 //                     }, child: Text('cancel')),
 //                   ],
-
 //                   titlePadding: EdgeInsets.only(top: 20,left: 20),
 //                   contentPadding: EdgeInsets.all(20),
 //                   contentTextStyle: TextStyle( fontWeight: FontWeight.bold,  color: Colors.blue),
@@ -330,7 +497,6 @@ Widget build(BuildContext context) {
 //             btnCancelOnPress: () {},
 //             btnOkOnPress: () {},
 //             ).show();
-
 //   },
 //    child: Text("show dailog bel fazet"))
 // ],),
@@ -344,10 +510,7 @@ Widget build(BuildContext context) {
 //                     itemCount: images.length,
 //                     itemBuilder: (context, i){
 //                       return Image.asset(images[i]['url'], fit: BoxFit.fill,);
-//                     }
-
-                    
-
+//                     }           
 //                   ),
 //                 ),
 //                 ElevatedButton(onPressed: (){
@@ -361,8 +524,7 @@ Widget build(BuildContext context) {
 //             TextFormField(         
 //                keyboardType: TextInputType.emailAddress,
 //                maxLines: 1,
-//               decoration: InputDecoration(
-                
+//               decoration: InputDecoration(               
 //                 enabled: true,
 //                 disabledBorder: OutlineInputBorder(
 //                   borderRadius: BorderRadius.circular(22),
@@ -370,24 +532,21 @@ Widget build(BuildContext context) {
 //                     color: Colors.red,
 //                     width: 3 ,                   
 //                   )
-//                 ),
-          
+//                 ),       
 //                 enabledBorder: OutlineInputBorder(
 //                   borderRadius: BorderRadius.circular(22),
 //                   borderSide: BorderSide(
 //                     color: Colors.indigo,
 //                     width: 3 ,                   
 //                   )
-//                 ),
-          
+//                 ),       
 //                 focusedBorder: OutlineInputBorder(
 //                   borderRadius: BorderRadius.circular(22),
 //                   borderSide: BorderSide(
 //                     color: Colors.black,
 //                     width: 3 ,                    
 //                   )
-//                 ),
-          
+//                 ),         
 //                 hintText: "type your message...",
 //                 hintStyle: TextStyle(color: Colors.blue),
 //                 prefixIcon: Icon(Icons.text_fields),
@@ -400,8 +559,7 @@ Widget build(BuildContext context) {
 //                keyboardType: TextInputType.emailAddress,
 //                obscureText: true,
 //                maxLines: 1,
-//               decoration: InputDecoration(
-                
+//               decoration: InputDecoration(              
 //                 enabled: true,
 //                 disabledBorder: OutlineInputBorder(
 //                   borderRadius: BorderRadius.circular(22),
@@ -409,34 +567,28 @@ Widget build(BuildContext context) {
 //                     color: Colors.red,
 //                     width: 3 ,                   
 //                   )
-//                 ),
-          
+//                 ),       
 //                 enabledBorder: OutlineInputBorder(
 //                   borderRadius: BorderRadius.circular(22),
 //                   borderSide: BorderSide(
 //                     color: Colors.indigo,
 //                     width: 3 ,                   
 //                   )
-//                 ),
-          
+//                 ),       
 //                 focusedBorder: OutlineInputBorder(
 //                   borderRadius: BorderRadius.circular(22),
 //                   borderSide: BorderSide(
 //                     color: Colors.black,
 //                     width: 3 ,                    
 //                   )
-//                 ),
-          
+//                 ),        
 //                 hintText: "type your password...",
 //                 hintStyle: TextStyle(color: Colors.blue),
 //                 prefixIcon: Icon(Icons.text_fields),
 //                 suffixIcon: Icon(Icons.hive_rounded , color: Colors.blue,),
-//                 icon: Icon(Icons.password_rounded),
-                
-//               ),
-          
-//             ), 
-      
+//                 icon: Icon(Icons.password_rounded),          
+//               ),         
+//             ),  
 //             Form(
 //              autovalidateMode: AutovalidateMode.always ,
 //               key: formState ,
@@ -508,10 +660,7 @@ Widget build(BuildContext context) {
 //       //   itemBuilder: (context , i){
 //       //     return Text('${posts[i]['title']}');
 //       //   }) ,
-
-
 // //sqflite 
-
 // ElevatedButton.icon(onPressed: () async {
 //   int response = await slqdb.inserData("INSERT INTO 'notes'('note') values ('note two') ");
 //   print(response) ;
@@ -530,8 +679,7 @@ Widget build(BuildContext context) {
 // }, icon: Icon(Icons.update), label: Text("UPDATE  data")),   
 //       ] ),       
 //      ),
-    ),
-    
-	);
+   // ),
+    //);
 }
 }

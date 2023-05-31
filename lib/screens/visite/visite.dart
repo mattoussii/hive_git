@@ -5,6 +5,7 @@ import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/crud.dart';
 import 'package:firebase_auth_app/main.dart';
 import 'package:firebase_auth_app/models/visiteModel.dart';
+import 'package:firebase_auth_app/screens/home.dart';
 import 'package:firebase_auth_app/screens/visite/edit.dart';
 import 'package:firebase_auth_app/screens/visite/visiteCard.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _visiteScreenState extends State<visiteScreen>{
       backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
-        'visite',
+        'ruche',
          style: GoogleFonts.robotoCondensed(
                    fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
                   ),),
@@ -52,6 +53,9 @@ class _visiteScreenState extends State<visiteScreen>{
           ),
         onPressed: (){
           Navigator.pop(context);
+          Navigator.of(context).push(MaterialPageRoute(
+          builder: (context)=>HomeScreen() 
+          ));
         },
       ),
 
@@ -64,16 +68,34 @@ class _visiteScreenState extends State<visiteScreen>{
                Navigator.of(context).pushNamed('add');
 
               }),
+              
             body: ListView(
               children: [
                 FutureBuilder(
-                  future:   getVisites() ,
+                  future:   getVisites(),
                   builder: (BuildContext context  , AsyncSnapshot snapshot){
                   if(snapshot.hasData){
                     if(snapshot.data["status"] == "failed" )
                     return Center(child: 
-                    Text('there is no visite',
-                       style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),)) ;
+                       Column(
+                                    children: [
+                                SizedBox(height: 50,),
+                                Center(
+                                  child: Image.asset(
+                                    'icons/visite.png',
+                                    height: 200,
+                                    width: 200,),
+                                ),
+                                  SizedBox(height: 30,),
+                                Text(
+                                    "tu n'as fait aucune visite" ,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                  ),
+                                ),
+                              ],
+                            ) 
+                       ) ;
                     return ListView.builder(
                       itemCount: snapshot.data['data'].length ,
                       shrinkWrap: true ,

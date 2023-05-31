@@ -12,7 +12,7 @@ class Second extends StatefulWidget {
 }
 
 class _SecondState extends State<Second> {
-  String? _qrInfo = 'Scan a QR/Bar code';
+  String? _qrInfo = 'Scanne QR-code /Bar code';
   bool camState = false;
 
   qrCallback(String? code) {
@@ -75,14 +75,19 @@ class _SecondState extends State<Second> {
               ),
             )
           : Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+           
            
             children: [
-               Image.asset(
-                'icons/qr.png',),
-
+               SizedBox(height: 50,),
+               Center(
+                 child: Image.asset(
+                  'icons/qr.png',
+                  height: 200,
+                  width: 200,),
+               ),
+                SizedBox(height: 30,),
                Text(
-                "Code :" + _qrInfo!,
+                  _qrInfo!,
                 style: TextStyle(
                   fontSize: 25,
                 ),

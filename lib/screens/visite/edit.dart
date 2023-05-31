@@ -9,8 +9,7 @@ import 'package:firebase_auth_app/main.dart';
 import 'package:firebase_auth_app/screens/visite/visite.dart';
 import 'package:firebase_auth_app/sqldb.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart'; // for date formatting
@@ -120,13 +119,33 @@ bool isloading =false ;
     date.text = widget.visites['visite_date'];
     super.initState();
   }
+  
   @override
   Widget build(BuildContext context) {    
     var time = DateTime.now() ;
     return Scaffold(
       appBar: AppBar(
-        title:  Text('add note'),
+        
+      backgroundColor: kPrimaryColor,
+      elevation: 0,
+      title: Text(
+        'modifier visite',
+         style: GoogleFonts.robotoCondensed(
+                   fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
+                  ),),
+      centerTitle: false,
+         leading: IconButton(
+        padding: EdgeInsets.only(right:kDefaultPadding ),
+        icon: Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+          ),
+        onPressed: (){
+          Navigator.pop(context);
+        },
       ),
+
+    ),
       body : isloading == true ? 
       Center(child: CircularProgressIndicator(),)
       : Container(
@@ -239,7 +258,7 @@ bool isloading =false ;
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(child: Text(
-                            'add image',
+                            'modifier image',
                             style: GoogleFonts.robotoCondensed(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -265,7 +284,7 @@ bool isloading =false ;
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(child: Text(
-                            'Edit',
+                            'modifier',
                             style: GoogleFonts.robotoCondensed(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/screens/home.dart';
-import 'package:firebase_auth_app/screens/scanner_screen/first.dart';
+// import 'package:firebase_auth_app/screens/scanner_screen/first.dart';
 import 'package:firebase_auth_app/screens/scanner_screen/second.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
         padding: EdgeInsets.only(right:kDefaultPadding ),
         icon: Icon(
           Icons.arrow_back,
-          color: Colors.white,
+          color: Colors.black,
           ),
         
         onPressed: (){
@@ -59,21 +59,21 @@ class _HomeState extends State<Home> {
           bottom: const TabBar(
             tabs: [
               
-              Tab(
-                icon: Icon(
-                  Icons.qr_code,
-                  size: 40,
+              // Tab(
+              //   icon: Icon(
+              //     Icons.qr_code,
+              //     size: 40,
                   
-                ),
-                child: Text('create'),
-              ),
+              //   ),
+              //   child: Text('create'),
+              // ),
               Tab(
                 icon: Icon(
                   Icons.qr_code_scanner,
                   size: 40,
                   
                 ),
-                child: Text('scanne'),
+                child: Text('scan'),
               ),
             ],
           ),
@@ -91,7 +91,7 @@ class _HomeState extends State<Home> {
 
         body: TabBarView(
           children: [
-            First(),
+            // First(),
             Second(),
           ],
         ),

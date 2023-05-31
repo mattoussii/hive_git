@@ -5,7 +5,9 @@ import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/screens/Auth/login.dart';
 import 'package:firebase_auth_app/screens/Auth/signup.dart';
 import 'package:firebase_auth_app/screens/Auth/success.dart';
+import 'package:firebase_auth_app/screens/Map.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/auth.dart';
+import 'package:firebase_auth_app/screens/history.dart';
 import 'package:firebase_auth_app/screens/visite/add.dart';
 import 'package:firebase_auth_app/screens/home.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/login_screen.dart';
@@ -17,7 +19,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:flutter_localizations/flutter_localizations.dart';
 
 late SharedPreferences sharedPref ;
 
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
        initialRoute: sharedPref.getString("id") == null ? "login" : "home" ,
      
        routes: {
+         'history':(context) => HistoryScreen(),
         'signup':(context) => signup(),
         'login':(context) => Login(),
         'home':(context) => HomeScreen() ,
@@ -61,6 +63,8 @@ class MyApp extends StatelessWidget {
         'visite':(context) => visiteScreen() ,
         'add':(context) => add() ,
         'edit':(context) => edit() ,
+         'map':(context) => Map_screen() ,
+        
         
 
         

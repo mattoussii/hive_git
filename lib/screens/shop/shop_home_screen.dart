@@ -22,7 +22,7 @@ class ShopScreen extends  StatelessWidget{
       backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
-        'Shop',
+        'boutique',
          style: GoogleFonts.robotoCondensed(
                    fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
                   ),),
