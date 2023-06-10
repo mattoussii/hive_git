@@ -62,7 +62,7 @@ class _visiteScreenState extends State<visiteScreen>{
     ),
            
             floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.add),
+              child: Icon(Icons.hive_rounded ,color: Colors.yellow,),
               onPressed: (){
 
                Navigator.of(context).pushNamed('add');

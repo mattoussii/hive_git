@@ -5,11 +5,9 @@ import 'package:firebase_auth_app/components/LinkAPI.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/crud.dart';
 import 'package:firebase_auth_app/main.dart';
-
 import 'package:firebase_auth_app/screens/visite/visite.dart';
 import 'package:firebase_auth_app/sqldb.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart'; // for date formatting

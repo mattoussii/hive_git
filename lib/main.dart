@@ -7,6 +7,9 @@ import 'package:firebase_auth_app/screens/Auth/signup.dart';
 import 'package:firebase_auth_app/screens/Auth/success.dart';
 import 'package:firebase_auth_app/screens/Map.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/auth.dart';
+import 'package:firebase_auth_app/screens/gallery/add_photo.dart';
+import 'package:firebase_auth_app/screens/gallery/edit_photo.dart';
+import 'package:firebase_auth_app/screens/gallery/gallery.dart';
 import 'package:firebase_auth_app/screens/history.dart';
 import 'package:firebase_auth_app/screens/visite/add.dart';
 import 'package:firebase_auth_app/screens/home.dart';
@@ -55,7 +58,7 @@ class MyApp extends StatelessWidget {
        initialRoute: sharedPref.getString("id") == null ? "login" : "home" ,
      
        routes: {
-         'history':(context) => HistoryScreen(),
+       'history':(context) => HistoryScreen(),
         'signup':(context) => signup(),
         'login':(context) => Login(),
         'home':(context) => HomeScreen() ,
@@ -63,7 +66,10 @@ class MyApp extends StatelessWidget {
         'visite':(context) => visiteScreen() ,
         'add':(context) => add() ,
         'edit':(context) => edit() ,
-         'map':(context) => Map_screen() ,
+        'map':(context) => Map_screen() ,
+        'editp':(context) => edit_photo() ,
+        'addp':(context) => add_photo() ,
+        'gallery':(context) => Gallery() ,
         
         
 

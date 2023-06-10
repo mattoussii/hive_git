@@ -5,10 +5,10 @@
 //-->  port  9999
 //--> enable make physique device request
 
-const String linkServerName = "http://192.168.1.7:9999/app_php";
+const String linkServerName = "http://192.168.1.5:9999/app_php";
 
 
-const String linkImageRoot= "http://192.168.1.7:9999/app_php/upload";
+const String linkImageRoot= "http://192.168.1.5:9999/app_php/upload";
 
 
 
@@ -28,3 +28,13 @@ const String linkDeleteVisite = "$linkServerName/visites/delete.php";
 const String linkEditVisite = "$linkServerName/visites/edit.php";
 
 const String linkViewVisite = "$linkServerName/visites/view.php";
+
+
+//photos
+const String linkAddPhoto = "$linkServerName/photos/add_photo.php";
+
+const String linkDeletePhoto= "$linkServerName/photos/delete_photo.php";
+
+const String linkEditPhoto = "$linkServerName/photos/edit_photo.php";
+
+const String linkViewPhoto = "$linkServerName/photos/view_photo.php";
