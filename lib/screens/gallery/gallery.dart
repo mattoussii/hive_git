@@ -130,7 +130,7 @@ class _GalleryState extends State<Gallery> {
                 child: 
                     Column(
                   children: [
-              SizedBox(height: 50,),
+              SizedBox(height: 150,),
               Center(
                 child: Image.asset(
                   'icons/beecam.png',
@@ -151,7 +151,28 @@ class _GalleryState extends State<Gallery> {
           ) ,
       ) ;
          }
-         return Center(child: Text('loading...'),) ;
+         return  Center(child: 
+                       Column(
+                                    children: [
+                                SizedBox(height: 150,),
+                                Center(
+                                  child: Image.asset(
+                                    'icons/beecam.png',
+                                    height: 200,
+                                    width: 200,),
+                                ),
+                                  SizedBox(height: 30,),
+                                Text(
+                                    "chargement ..." ,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.green ,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ],
+                            ) 
+                       ) ;
         })
        ],),
      )

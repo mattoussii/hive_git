@@ -123,9 +123,51 @@ class _visiteScreenState extends State<visiteScreen>{
                     );
                   }
                   if(snapshot.connectionState == ConnectionState.waiting){
-                    return Center(child: CircularProgressIndicator());
+                    return Center(child: 
+                       Column(
+                                    children: [
+                                SizedBox(height: 150,),
+                                Center(
+                                  child: Image.asset(
+                                    'icons/visite.png',
+                                    height: 200,
+                                    width: 200,),
+                                ),
+                                  SizedBox(height: 30,),
+                                Text(
+                                    "chargement ..." ,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                     color: Colors.green ,
+                                     fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ],
+                            ) 
+                       ) ;
                   }
-                  return Center(child:  CircularProgressIndicator());
+                  return  Center(child: 
+                       Column(
+                                    children: [
+                                SizedBox(height: 150,),
+                                Center(
+                                  child: Image.asset(
+                                    'icons/visite.png',
+                                    height: 200,
+                                    width: 200,),
+                                ),
+                                  SizedBox(height: 30,),
+                                Text(
+                                    "chargement ..." ,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.green ,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ],
+                            ) 
+                       ) ;
                 })
 
               ],

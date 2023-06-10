@@ -4,7 +4,7 @@ import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/crud.dart';
 import 'package:firebase_auth_app/main.dart';
 import 'package:firebase_auth_app/models/visiteModel.dart';
-import 'package:firebase_auth_app/screens/history_card.dart';
+import 'package:firebase_auth_app/screens/historique/history_card.dart';
 import 'package:firebase_auth_app/screens/visite/edit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -70,7 +70,7 @@ class _HistoryScreenState extends State<HistoryScreen>{
                       child: 
                                       Column(
                                     children: [
-                                SizedBox(height: 50,),
+                                SizedBox(height: 150,),
                                 Center(
                                   child: Image.asset(
                                     'icons/history.png',
@@ -108,7 +108,28 @@ class _HistoryScreenState extends State<HistoryScreen>{
                   if(snapshot.connectionState == ConnectionState.waiting){
                     return Center(child: CircularProgressIndicator());
                   }
-                  return Center(child:  CircularProgressIndicator());
+                  return Center(
+                      child:   Column(
+                                    children: [
+                                SizedBox(height: 150,),
+                                Center(
+                                  child: Image.asset(
+                                    'icons/history.png',
+                                    height: 200,
+                                    width: 200,),
+                                ),
+                                  SizedBox(height: 30,),
+                                Text(
+                                    "chargement ..." ,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold ,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                              ],
+                            ) 
+                       ) ;
                 })
 
               ],

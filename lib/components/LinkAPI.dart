@@ -38,3 +38,7 @@ const String linkDeletePhoto= "$linkServerName/photos/delete_photo.php";
 const String linkEditPhoto = "$linkServerName/photos/edit_photo.php";
 
 const String linkViewPhoto = "$linkServerName/photos/view_photo.php";
+
+
+//contact
+const String linkAddContact = "$linkServerName/contact/add_contact.php";

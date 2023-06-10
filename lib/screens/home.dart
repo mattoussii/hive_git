@@ -5,7 +5,7 @@ import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/main.dart';
 import 'package:firebase_auth_app/screens/Map.dart';
 import 'package:firebase_auth_app/screens/visite/visite.dart';
-import 'package:firebase_auth_app/screens/history.dart';
+import 'package:firebase_auth_app/screens/historique/history.dart';
 import 'package:firebase_auth_app/screens/scanner_screen/scanner.dart';
 import 'package:firebase_auth_app/screens/shop/shop_home_screen.dart';
 import 'package:firebase_auth_app/screens/gallery/gallery.dart';

@@ -1,6 +1,9 @@
-// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers, avoid_types_as_parameter_names, unnecessary_string_interpolations, prefer_typing_uninitialized_variables, unused_import, unused_field
+// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_constructors, avoid_print, unnecessary_new, non_constant_identifier_names, avoid_unnecessary_containers, avoid_types_as_parameter_names, unnecessary_string_interpolations, prefer_typing_uninitialized_variables, unused_import, unused_field, prefer_final_fields, use_build_context_synchronously
+import 'package:firebase_auth_app/components/LinkAPI.dart';
+import 'package:firebase_auth_app/components/valid.dart';
+import 'package:firebase_auth_app/crud.dart';
+import 'package:firebase_auth_app/main.dart';
 import 'package:firebase_auth_app/screens/home.dart';
-import 'package:firebase_auth_app/sqldb.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,69 +18,47 @@ const helpscreen({Key? key}) : super(key: key);
 _helpscreenState createState() => _helpscreenState();
 }
 class _helpscreenState extends State<helpscreen> {
-// Initial Selected Value
-String? dropdownvalue ;
-
-// List of items in our dropdown menu
-var items = [	
-	'Item 1',
-	'Item 2',
-	'Item 3',
-	'Item 4',
-	'Item 5',
-];
-// List of images
-List images = [
-  { 'url':'icons/gallery.png'} ,
-  {'url':'icons/help.png'} ,
-  { 'url':'icons/history.png'} ,
-  {'url':'icons/locate.png'} , 
-  {'url':'icons/location.png'} ,
-  {'url':'icons/love.png'} ,
-  {'url':'icons/qr-code.png'} ,
-  {'url':'icons/qr-scan.png'} ,
-  {'url':'icons/qr.png'}, 
-  {'url':'icons/seek.png'} ,
-  {'url':'icons/shop.png'} ,
-  {'url':'icons/trade.png'} ,
-  {'url':'icons/where.png'} ,
-];
-bool check1 = false;
-bool check2 = false;
-bool check3 = false;
-String? radio ;
-bool notify = false;
-PageController? pc;
-GlobalKey<FormState> formState = new GlobalKey<FormState>();
-var username ;
-var phone ;
-  List posts = [];
-  // Future getPost() async {
-  //   var  url = "https://jsonplaceholder.typicode.com/posts" ;  
-  //   var response = await http.get(Uri.parse(url));
-  //   var respnsebody = jsonDecode(response.body);  
-  //   setState(() {
-  //     posts.addAll(respnsebody) ;
-  //   });
-  //   print(posts) ;
-  // }
-// var _valslider = 10.0 ;
-//  @override
-// initState(){
-//   pc = new PageController(initialPage: 10);
-//   super.initState();
-//    getPost();
-// }
-// SqlDb slqdb = SqlDb() ;
 
 
-final TextEditingController content  = TextEditingController() ;
-final TextEditingController title = TextEditingController() ;
+
+Crud _crud = Crud() ;
+GlobalKey<FormState> formState =GlobalKey() ;
+final TextEditingController name  = TextEditingController() ;
+final TextEditingController email = TextEditingController() ;
+final TextEditingController feedback = TextEditingController() ;
+
+
+nav(){
+  Navigator.of(context).pushReplacementNamed('help');
+}
+
+ AddContact() async {
+  if(formState.currentState!.validate()){
+
+    var response = await _crud.postRequest(linkAddContact, {
+    "name" :name.text,
+    "email" :email.text,
+    "feedback" :feedback.text,
+    "id"     : sharedPref.getString("id"),
+  } );
+    
+    setState(() {  
+    });
+  if(response["status"] == "success"){ 
+
+      
+            
+  }else{ 
+  }
+  }
+ }
+
 
 @override
 Widget build(BuildContext context) {
 	return Scaffold( 
       backgroundColor: Color.fromARGB(255, 215, 222, 228),
+     
       appBar: AppBar(
       backgroundColor: kPrimaryColor,
       elevation: 0,
@@ -102,164 +83,184 @@ Widget build(BuildContext context) {
       ),
 
     ),
-       body:
-       SafeArea(   
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image.asset('icons/help.png',
-                height: 100,), 
-                SizedBox(height :10),
-                Text(
+    
+     
+      body: 
+       Container(   
+        padding: EdgeInsets.all(10),
+        child: Form(
+          key: formState,
+          child: ListView(   
+            children: [
+              Image.asset('icons/help.png',
+              height: 100,), 
+              SizedBox(height :10),
+              Center(
+                child: Text(
                   'Entrez en contact avec moi !',
                   style: GoogleFonts.robotoCondensed(
                     fontSize: 20,fontWeight: FontWeight.bold, color: Colors.black,
                   ),
                   ),
-               SizedBox(height: 50,),
-                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                   child: TextFormField(         
-                                keyboardType: TextInputType.emailAddress,
-                              maxLines: 1,
-                               decoration: InputDecoration(              
-                                 enabled: true,
-                                 disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 3 ,                   
-                    )
-                                 ),       
-                                 enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(
-                      color: Colors.green,
-                      width: 3 ,                   
-                    )
-                                 ),       
-                                 focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                      width: 3 ,                    
-                    )
-                                 ),        
-                                 hintText: "tapez votre nom...",
-                                 hintStyle: TextStyle(color: Colors.blue),
-                                 prefixIcon: Icon(Icons.person , color: Colors.green,),        
-                               ),         
-                             ),
-                 ),
-                SizedBox(height :20), 
-                Padding(
-                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: TextFormField(         
-                               keyboardType: TextInputType.emailAddress,
-                              maxLines: 1,
-                              decoration: InputDecoration(              
-                  enabled: true,
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 3 ,                   
-                    )
-                  ),       
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(
-                      color: Colors.green,
-                      width: 3 ,                   
-                    )
-                  ),       
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                      width: 3 ,                    
-                    )
-                  ),        
-                  hintText: "tapez votre e-mail ...",
-                  hintStyle: TextStyle(color: Colors.blue),
-                  prefixIcon: Icon(Icons.email , color: Colors.green,),          
-                              ),         
-                            ),
-                ),
-                SizedBox(height :20),
-                Padding(
-                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: TextFormField(   
-                      keyboardType: TextInputType.multiline,
-                      minLines: 1, 
-                      maxLines: 5,      
-                   decoration: InputDecoration(              
-                  enabled: true,
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 3 ,                   
-                    )
-                  ),       
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(
-                      color: Colors.green,
-                      width: 3 ,                   
-                    )
-                  ),       
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(22),
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                      width: 3 ,                    
-                    )
-                  ),        
-                  hintText: "tapez vos commentaires /suggestion / etc ..." , 
-                  
-                  hintStyle: TextStyle(color: Colors.blue),
-                  prefixIcon: Icon(Icons.comment , color: Colors.green,),  
-                        
-                              ),         
-                            ),
-                ),
-                 SizedBox(height :50),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 85),
-                      child: GestureDetector(
-                        onTap: () async{
-                          
-
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          decoration:  BoxDecoration(
-                            color: Colors.green[700],
-                            borderRadius: BorderRadius.circular(12),
+              ),
+              SizedBox(height: 50,),
+           
+        
+              ////textfield name
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                 child: TextFormField( 
+                   validator: (value) {
+                    if (value!.isEmpty) {
+                     return 'ce champ ne peut pas être vide';
+                    }
+                     return null; 
+                   },
+                  controller: name,       
+                              keyboardType: TextInputType.text,
+                            maxLines: 1,
+                             decoration: InputDecoration(              
+                                            
+                          enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(22),
+                          borderSide: BorderSide(
+                            color: Colors.green,
+                            width: 3 ,                   
+                          )
+                                      ),       
+                          focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(22),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 3 ,                    
+                          )
+                                      ),        
+                            hintText: "tapez votre nom...",
+                            hintStyle: TextStyle(color: Colors.blue),
+                            prefixIcon: Icon(Icons.person , color: Colors.green,),        
+                                    ),         
+                                  ),
+               ),
+           
+              SizedBox(height :20), 
+            
+              ////textfield email
+              Padding(
+                 padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: TextFormField(   
+                    validator: (value) {
+                    if (value!.isEmpty) {
+                     return 'ce champ ne peut pas être vide';
+                    }
+                     return null; 
+                   },
+                  controller: email,       
+                             keyboardType: TextInputType.emailAddress,
+                            maxLines: 1,
+                            decoration: InputDecoration(                     
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.green,
+                    width: 3 ,                   
+                  )
+                ),       
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 3 ,                    
+                  )
+                ),        
+                hintText: "tapez votre e-mail ...",
+                hintStyle: TextStyle(color: Colors.blue),
+                prefixIcon: Icon(Icons.email , color: Colors.green,),          
+                            ),         
                           ),
-                          child: Center(child: Text(
-                            'envoyer',
-                            style: GoogleFonts.robotoCondensed(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                             ),
-                            ),
+              ),
+             
+              SizedBox(height :20),
+             
+              ////textfield feedback
+              Padding(
+                 padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: TextFormField( 
+                    validator: (value) {
+                    if (value!.isEmpty) {
+                     return 'ce champ ne peut pas être vide';
+                    }
+                     return null; 
+                   }, 
+                  controller: feedback,  
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1, 
+                    maxLines: 5,      
+                 decoration: InputDecoration(              
+                enabled: true,
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                    width: 3 ,                   
+                  )
+                ),       
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.green,
+                    width: 3 ,                   
+                  )
+                ),       
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 3 ,                    
+                  )
+                ),        
+                hintText: "tapez vos commentaires /suggestion / etc ..." , 
+                
+                hintStyle: TextStyle(color: Colors.blue),
+                prefixIcon: Icon(Icons.comment , color: Colors.green,),  
+                      
+                            ),         
+                          ),
+              ),
+               SizedBox(height :50),
+              ////send button
+              Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 85),
+                    child: GestureDetector(
+                      onTap: () async{
+                       await  AddContact() ;
+        
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        decoration:  BoxDecoration(
+                          color: Colors.green[700],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(child: Text(
+                          'envoyer',
+                          style: GoogleFonts.robotoCondensed(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                           ),
                           ),
                         ),
                       ),
                     ),
-                  ],
                   ),
-          )
-
-    )
+                
+                ],
+                ),
+        )
        ),
        
        );
+
   // Scaffold(
   //   backgroundColor:kBackgroundColor ,
   //   appBar: AppBar(

@@ -10,7 +10,8 @@ import 'package:firebase_auth_app/screens/firebase_auth/auth.dart';
 import 'package:firebase_auth_app/screens/gallery/add_photo.dart';
 import 'package:firebase_auth_app/screens/gallery/edit_photo.dart';
 import 'package:firebase_auth_app/screens/gallery/gallery.dart';
-import 'package:firebase_auth_app/screens/history.dart';
+import 'package:firebase_auth_app/screens/help.dart';
+import 'package:firebase_auth_app/screens/historique/history.dart';
 import 'package:firebase_auth_app/screens/visite/add.dart';
 import 'package:firebase_auth_app/screens/home.dart';
 import 'package:firebase_auth_app/screens/firebase_auth/login_screen.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
         'editp':(context) => edit_photo() ,
         'addp':(context) => add_photo() ,
         'gallery':(context) => Gallery() ,
+        'help':(context) => helpscreen() ,
         
         
 
