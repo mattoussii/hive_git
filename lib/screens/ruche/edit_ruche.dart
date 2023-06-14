@@ -13,89 +13,51 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart'; // for date formatting
 
 
-class edit extends StatefulWidget {
-  final visites ;
-  const edit({super.key, this.visites, });
+class edit_ruche extends StatefulWidget {
+  final ruches ;
+  const edit_ruche({super.key, this.ruches, });
   @override
-  State<edit> createState() => _editState();
+  State<edit_ruche> createState() => _edit_rucheState();
 }
 
-class _editState extends State<edit> {
+class _edit_rucheState extends State<edit_ruche> {
 
-   //Position? cl ;
-  // Future getPositon() async {
-  //   bool services ;
-  //   LocationPermission per ;
-  //    services = await Geolocator.isLocationServiceEnabled() ;
-  //    if(services == false){
-  //     AwesomeDialog(
-  //       context: context ,
-  //       title: "services",
-  //       body: 
-  //       Text('services not enable',
-  //                style: GoogleFonts.robotoCondensed(
-  //                   fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
-  //                 ),                
-  //             ),
-  //       btnOkOnPress: () {},    
-  //       ).show();}
-  //   per = await Geolocator.checkPermission() ;
-  //   if( per == LocationPermission.denied) {
-  //     per = await Geolocator.requestPermission() ;
-  //     if(per == LocationPermission.always ){
-  //       getLatAndLong();
-  //     }
-  //   }
-  // }
-  // Future<Position> getLatAndLong() async {
-  //   return await Geolocator.getCurrentPosition().then((value) =>  value);
-  // }
-  // File ? _file ;
-  // Future pickercamera() async{
-  //   final myfile = await ImagePicker().pickImage(source: ImageSource.camera);
-  //   setState(() {
-  //     _file = File(myfile!.path);
-  //   });
-  // }
-  // Future pickerGallery() async{
-  //   final myfile = await ImagePicker().pickImage(source: ImageSource.gallery);
-  //   setState(() {
-  //     _file = File(myfile!.path);
-  //   });
-  // }
 
 
 Crud _crud = Crud() ;
 File? myfile ;
 GlobalKey<FormState> formState =GlobalKey() ;
-final TextEditingController content  = TextEditingController() ;
-final TextEditingController title = TextEditingController() ;
-final TextEditingController date = TextEditingController() ;
+final TextEditingController reference  = TextEditingController() ;
+final TextEditingController nb_cadre = TextEditingController() ;
+final TextEditingController new_position = TextEditingController() ;
+final TextEditingController old_position = TextEditingController() ;
 
 bool isloading =false ;
 
- EditVisites() async {
+ EditRuche() async {
   if(formState.currentState!.validate()){
     isloading = true ;
     setState(() {});
     var response ;
 
     if(myfile == null){
-    response = await _crud.postRequest(linkEditVisite, {
-    "title"     : title.text,
-    "content"   : content.text ,
-    "date"      : date.text ,
-    "id"        : widget.visites['visite_id'].toString() ,
-    "imagename" : widget.visites['visite_image'].toString() ,
+    response = await _crud.postRequest(linkEditRuche, {
+    "reference"     : reference.text,
+    "nb_cadre"      : nb_cadre.text ,
+    "new_position"  : new_position.text ,
+    "old_position"  : old_position.text ,
+    "id"        : widget.ruches['ruche_id'].toString() ,
+    "imagename" : widget.ruches['ruche_image'].toString() ,
 
   });
     }else{
-    response = await _crud.postRequestwithFile(linkEditVisite, {
-    "title"     : title.text,
-    "content"   : content.text ,
-    "date"      : date.text ,
-    "imagename" : widget.visites['visite_image'].toString() ,
-    "id"        : widget.visites['visite_id'].toString() ,
+    response = await _crud.postRequestwithFile(linkEditRuche, {
+    "reference"     : reference.text,
+    "nb_cadre"      : nb_cadre.text ,
+    "new_position"  : new_position.text ,
+    "old_position"  : old_position.text ,
+    "id"        : widget.ruches['ruche_id'].toString() ,
+    "imagename" : widget.ruches['ruche_image'].toString() ,
   },myfile!);
     }
 
@@ -104,7 +66,7 @@ bool isloading =false ;
     setState(() {  
     });
   if(response["status"] == "success"){
-    Navigator.of(context).pushReplacementNamed('visite');
+    Navigator.of(context).pushReplacementNamed('ruche');
   }else{ 
   }
   }
@@ -112,22 +74,21 @@ bool isloading =false ;
 
  @override
   void initState() {
-    title.text = widget.visites['visite_title'];
-    content.text = widget.visites['visite_content'];
-    date.text = widget.visites['visite_date'];
+    reference.text = widget.ruches['reference'];
+    nb_cadre.text = widget.ruches['nb_cadre'];
+    new_position.text = widget.ruches['new_position'];
+    old_position.text = widget.ruches['old_position'];
     super.initState();
   }
   
   @override
   Widget build(BuildContext context) {    
-    var time = DateTime.now() ;
     return Scaffold(
       appBar: AppBar(
-        
       backgroundColor: kPrimaryColor,
       elevation: 0,
       title: Text(
-        'modifier visite',
+        'details de ruche',
          style: GoogleFonts.robotoCondensed(
                    fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
                   ),),
@@ -144,6 +105,8 @@ bool isloading =false ;
       ),
 
     ),
+    
+     
       body : isloading == true ? 
       Center(child: CircularProgressIndicator(),)
       : Container(
@@ -152,83 +115,86 @@ bool isloading =false ;
           key: formState,
           child: ListView(
             children: [
-
-                   //title  
+                    Container(height: 20,),
+                   //reference 
                   TextFormField(
                       validator: (text){
                         if (text!.isEmpty){
-                          return "this field can't be empty";
+                          return "ce champ ne peut pas être vide";
                         }
                         return null ;
                       },
-                    controller: title,
-                    maxLength: 30 ,
+                    controller: reference,
+                    minLines: 1,
+                    maxLines: 2,
                     decoration: InputDecoration(
                     filled: true,
                     fillColor: kBackgroundColor,
-                    labelText: 'titre de visite ',
+                    labelText: 'reference de la ruche ',
                      iconColor: Colors.black,
                     prefixIcon: Icon(Icons.note_add , color:  Colors.green,)
                   ),
                   ),
-
-                  //note
+                   
+                   Container(height: 20,),
+                  //nb_cadre
                   TextFormField(
+                    keyboardType: TextInputType.number,
                      validator: (text){
                         if (text!.isEmpty){
-                          return "this field can't be empty";
+                          return "ce champ ne peut pas être vide";
                         }
                         return null ;
                       },
-                    controller: content,
-                      minLines: 1,
-                      maxLines: 3,
-                      maxLength: 200 ,
+                    controller: nb_cadre,
                       decoration: InputDecoration(
                     filled: true,
                     fillColor: kBackgroundColor,
-                    labelText: ' note',
+                    labelText: ' nombre de cadre',
                      iconColor: Colors.black,
                     prefixIcon: Icon(Icons.note_add , color:  Colors.green,)
                   ),
                   ),
-
-                  ///time
+                   
+                   Container(height: 20,),
+                  //new_position
                   TextFormField(
-                    validator: (text){
+                     validator: (text){
                         if (text!.isEmpty){
-                          return "this field can't be empty";
+                          return "ce champ ne peut pas être vide";
                         }
                         return null ;
                       },
-                    controller: date,
-                    decoration: InputDecoration(
+                    controller: new_position,
+                      decoration: InputDecoration(
                     filled: true,
                     fillColor: kBackgroundColor,
-                    labelText: '  date de creation ',
+                    labelText: 'nouvelle emplacement de la ruche',
                      iconColor: Colors.black,
-                    prefixIcon: Icon(Icons.calendar_today , color:  Colors.green,), 
+                    prefixIcon: Icon(Icons.note_add , color:  Colors.green,)
                   ),
-                  onTap: ()async {
-                    DateTime? pickDate = await showDatePicker(
-                      context: context, 
-                      initialDate: DateTime.now(),
-                       firstDate: DateTime(2000),
-                        lastDate: DateTime(2100));
-                    if(pickDate!= null){
-                      setState(() {
-                        date.text = DateFormat('yyyy-MM-dd').format(pickDate) ;
-                      });
-                    }    
-                  } ,
-                  ),                                 
+                  ),
+                  
+                  Container(height: 20,),
+                  //old_position
+                  TextFormField(
+                     validator: (text){
+                        if (text!.isEmpty){
+                          return "ce champ ne peut pas être vide";
+                        }
+                        return null ;
+                      },
+                    controller: old_position,
+                      decoration: InputDecoration(
+                    filled: true,
+                    fillColor: kBackgroundColor,
+                    labelText: 'ancien emplacement de la ruche',
+                     iconColor: Colors.black,
+                    prefixIcon: Icon(Icons.note_add , color:  Colors.green,)
+                  ),
+                  ),              
                  
-                  //add image and show location
-                  // ElevatedButton(
-                  //    child:  Text('add image for note'),
-                  //    onPressed: (){ showButtomSheet();}, ),                
-                  // Center(child: _file == null ? const Text('image not selected') : Image.file(_file!),),                                                        
-                //                
+              
                   //location(get latitude and longitude) button                            
                 //   ElevatedButton(onPressed: () async {
                 //     cl = await getLatAndLong()  ;
@@ -240,40 +206,42 @@ bool isloading =false ;
                 //   } , child: Text('show location') 
                 //   ),
 
-                  Container(height: 20,),
+                   Container(height: 20,),
 
-                   Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 85),
-                      child: GestureDetector(
-                        
-                        onTap: ()  {
-                         showButtomSheet();
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          decoration:  BoxDecoration(
-                            color: myfile == null ? Colors.black :Colors.green[700],
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Center(child: Text(
-                            'modifier image',
-                            style: GoogleFonts.robotoCondensed(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                             ),
+                   Row(
+                     children: [
+                  //modifier image
+                       Padding(
+                          padding: const EdgeInsets.symmetric(horizontal:15),
+                          child: GestureDetector(
+                            
+                            onTap: ()  {
+                             showButtomSheet();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(16),
+                              decoration:  BoxDecoration(
+                                color: myfile == null ? Colors.black :Colors.green[700],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Center(child: Text(
+                                'modifier image',
+                                style: GoogleFonts.robotoCondensed(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                 ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Container(height: 20,),
                    //add button
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 85),
+                   Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: GestureDetector(
                         onTap: () async {
-                          await   EditVisites();
+                          await   EditRuche();
                         },
                         child: Container(
                           padding: EdgeInsets.all(16),
@@ -282,7 +250,7 @@ bool isloading =false ;
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(child: Text(
-                            'modifier',
+                            'modifier ruche',
                             style: GoogleFonts.robotoCondensed(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -293,6 +261,46 @@ bool isloading =false ;
                         ),
                       ),
                     ),
+                     ],
+                   ),
+                 
+  
+                  
+
+
+
+
+
+
+                Container(height: 170,),      
+                   //visite button
+                   Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      child: GestureDetector(
+                        onTap: (){
+                       Navigator.of(context).pushNamed('visite');
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration:  BoxDecoration(
+                            color: Colors.amber[700],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(child: Text(
+                            'les visites de cette ruche',
+                            style: GoogleFonts.robotoCondensed(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                             ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  
+
+                  
 
             ],
           ),
@@ -370,3 +378,6 @@ bool isloading =false ;
   }
 
 }
+
+
+

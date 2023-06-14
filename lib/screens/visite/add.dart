@@ -61,6 +61,7 @@ GlobalKey<FormState> formState =GlobalKey() ;
 final TextEditingController content  = TextEditingController() ;
 final TextEditingController title = TextEditingController() ;
 final TextEditingController date = TextEditingController() ;
+final TextEditingController ruche = TextEditingController() ;
 
 bool isloading =false ;
 
@@ -71,7 +72,7 @@ bool isloading =false ;
             dialogType: DialogType.warning,
             animType: AnimType.rightSlide,
             body:  Text(
-              'please add photo related to visite ' ,
+              'veuillez ajouter une photo liée à la visite' ,
               style: GoogleFonts.robotoCondensed(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -89,7 +90,7 @@ bool isloading =false ;
     "title"   :title.text,
     "content" : content.text ,
     "date"    : date.text ,
-    "id"      : sharedPref.getString("id"),
+    "rucheid" : ruche.text ,
   }, myfile! );
     isloading = false ;
     setState(() {  
@@ -152,7 +153,7 @@ bool isloading =false ;
                     decoration: InputDecoration(
                     filled: true,
                     fillColor: kBackgroundColor,
-                    labelText: 'nom de ruche ',
+                    labelText: 'titre de visite ',
                      iconColor: Colors.black,
                     prefixIcon: Icon(Icons.note_add , color:  Colors.green,)
                   ),
@@ -209,6 +210,30 @@ bool isloading =false ;
                     }    
                   } ,
                   ),                                 
+                 
+                  SizedBox(height: 20,) ,
+                 
+                  ///ruche
+                  TextFormField(
+                     keyboardType: TextInputType.number,
+                     validator: (text){
+                        if (text!.isEmpty ){
+                          return "this field can't be empty";
+                        }
+                       if (text.length > 1 ){
+                          return "max caractere reached";
+                        }
+                        return null ;
+                      },
+                    controller: ruche,
+                      decoration: InputDecoration(
+                    filled: true,
+                    fillColor: kBackgroundColor,
+                    labelText: ' ruche number',
+                     iconColor: Colors.black,
+                    prefixIcon: Icon(Icons.note_add , color:  Colors.green,)
+                  ),
+                  ),
                  
                   //add image and show location
                   // ElevatedButton(

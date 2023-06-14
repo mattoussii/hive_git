@@ -4,10 +4,11 @@ import 'package:firebase_auth_app/components/LinkAPI.dart';
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/main.dart';
 import 'package:firebase_auth_app/screens/Map.dart';
+import 'package:firebase_auth_app/screens/ruche/ruche.dart';
 import 'package:firebase_auth_app/screens/visite/visite.dart';
 import 'package:firebase_auth_app/screens/historique/history.dart';
 import 'package:firebase_auth_app/screens/scanner_screen/scanner.dart';
-import 'package:firebase_auth_app/screens/shop/shop_home_screen.dart';
+import 'package:firebase_auth_app/shop/shop_screens_body/shop_home_screen.dart';
 import 'package:firebase_auth_app/screens/gallery/gallery.dart';
 import 'package:firebase_auth_app/screens/help.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: GoogleFonts.robotoCondensed(
                               fontSize: 15,fontWeight: FontWeight.normal, color: Colors.black,
                               ),
+                        
                       ),
                     ],
                   ),
@@ -135,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                         Navigator.pop(context);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context)=>visiteScreen()
+                        builder: (context)=>rucheScreen()
                         ));
                       
                     },
@@ -369,7 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   splashColor: Colors.amber, 
             
                                   onTap: () {  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) =>visiteScreen() ),
+                                      MaterialPageRoute(builder: (context) =>rucheScreen() ),
                                           ); }, 
             
             

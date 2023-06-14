@@ -28,13 +28,10 @@ final TextEditingController email = TextEditingController() ;
 final TextEditingController feedback = TextEditingController() ;
 
 
-nav(){
-  Navigator.of(context).pushReplacementNamed('help');
-}
-
+bool isloading =false ;
  AddContact() async {
   if(formState.currentState!.validate()){
-
+ isloading = true ;
     var response = await _crud.postRequest(linkAddContact, {
     "name" :name.text,
     "email" :email.text,
@@ -46,9 +43,10 @@ nav(){
     });
   if(response["status"] == "success"){ 
 
-      
+      Navigator.of(context).pushReplacementNamed('help');
             
   }else{ 
+
   }
   }
  }
@@ -85,7 +83,30 @@ Widget build(BuildContext context) {
     ),
     
      
-      body: 
+      body: isloading == true ?
+     Center( child: 
+              Column(
+                  children: [
+              SizedBox(height: 150,),
+              Center(
+                child: Image.asset(
+                  'icons/help.png',
+                  height: 200,
+                  width: 200,),
+              ),
+                SizedBox(height: 30,),
+              Text(
+                  "chargement ..." ,
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold ,
+                  color: Colors.blue
+                ),
+              ),
+            ],
+          ) 
+       ) 
+      : 
        Container(   
         padding: EdgeInsets.all(10),
         child: Form(
@@ -110,6 +131,7 @@ Widget build(BuildContext context) {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                  child: TextFormField( 
+                  autovalidateMode: AutovalidateMode.onUserInteraction ,
                    validator: (value) {
                     if (value!.isEmpty) {
                      return 'ce champ ne peut pas être vide';
@@ -148,6 +170,7 @@ Widget build(BuildContext context) {
               Padding(
                  padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: TextFormField(   
+                  autovalidateMode: AutovalidateMode.onUserInteraction ,
                     validator: (value) {
                     if (value!.isEmpty) {
                      return 'ce champ ne peut pas être vide';
@@ -183,8 +206,10 @@ Widget build(BuildContext context) {
              
               ////textfield feedback
               Padding(
+                
                  padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: TextFormField( 
+                  autovalidateMode: AutovalidateMode.onUserInteraction ,
                     validator: (value) {
                     if (value!.isEmpty) {
                      return 'ce champ ne peut pas être vide';

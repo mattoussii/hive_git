@@ -61,6 +61,7 @@ class Crud {
     filename: basename(file.path));
     request.headers.addAll(myheaders);
     request.files.add(multipartFile);
+    
     //request dinamique title/content/date ...
     data.forEach((key, value) {
       request.fields[key] =value ;

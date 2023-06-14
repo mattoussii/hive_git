@@ -6,7 +6,7 @@ class VisiteModel {
   String? visiteContent;
   String? visiteDate;
   String? visiteImage;
-  int? visiteUser;
+  int? visiteRuche;
 
   VisiteModel(
       {this.visiteId,
@@ -14,7 +14,7 @@ class VisiteModel {
       this.visiteContent,
       this.visiteDate,
       this.visiteImage,
-      this.visiteUser});
+      this.visiteRuche});
 
   VisiteModel.fromJson(Map<String, dynamic> json) {
     visiteId = json['visite_id'];
@@ -22,7 +22,7 @@ class VisiteModel {
     visiteContent = json['visite_content'];
     visiteDate = json['visite_date'];
     visiteImage = json['visite_image'];
-    visiteUser = json['visite_user'];
+    visiteRuche = json['visite_ruche'];
   }
 
 
