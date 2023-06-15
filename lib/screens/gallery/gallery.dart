@@ -61,11 +61,13 @@ class _GalleryState extends State<Gallery> {
            onPressed: (){
             Navigator.of(context).pushNamed('addp');
            }),
-      
+      backgroundColor: Color.fromARGB(255, 188, 185, 185),
       body: 
      Container(
+      
       padding: EdgeInsets.all(15),
        child: ListView(children: [
+        SizedBox(height: 10,),
 
         FutureBuilder(
 
@@ -98,12 +100,15 @@ class _GalleryState extends State<Gallery> {
       ) ;
             
             return ListView.builder(
+              
               itemCount:snapshot.data['data'].length ,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, i){
+                
               return CardPhoto(
-
+                
+ 
                  onDelete: () async {
                      var response = await _crud.postRequest(linkDeletePhoto, {
                      "id"        : snapshot.data['data'][i]['photo_id'].toString(),

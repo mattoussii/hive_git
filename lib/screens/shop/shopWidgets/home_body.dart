@@ -1,8 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, prefer_const_constructors_in_immutables
 import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/models/product.dart';
-import 'package:firebase_auth_app/shop/shop_screens_body/shop_details_screen.dart';
-import 'package:firebase_auth_app/shop/shopWidgets/product_card.dart';
+import 'package:firebase_auth_app/screens/shop/shop_screens_body/shop_details_screen.dart';
+import 'package:firebase_auth_app/screens/shop/shopWidgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 

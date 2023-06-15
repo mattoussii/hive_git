@@ -28,7 +28,7 @@ class _visiteScreenState extends State<visiteScreen>{
   getVisites() async {
 
     var response = await _crud.postRequest(linkViewVisite, {
-     "rucheid": RucheModel.rucheid.toString(),
+     "rucheid": RucheModel ,
 
 
       
@@ -67,7 +67,7 @@ class _visiteScreenState extends State<visiteScreen>{
     ),
            
             floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.hive_rounded ,color: Colors.yellow,),
+              child: Icon(Icons.add_task_sharp ,color: Colors.yellow,),
               onPressed: (){
 
                Navigator.of(context).pushNamed('add');

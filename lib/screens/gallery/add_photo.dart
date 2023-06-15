@@ -156,7 +156,7 @@ bool isloading =false ;
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(child: Text(
-                              'Ajouter image',
+                              'Ajouter ',
                               style: GoogleFonts.robotoCondensed(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

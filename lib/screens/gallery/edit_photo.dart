@@ -64,6 +64,12 @@ bool isloading =false ;
   }
   }
  }
+  @override
+  void initState() {
+    detail.text = widget.photos['photo_detail'];
+
+    super.initState();
+  }
   
   
   @override
@@ -154,7 +160,7 @@ bool isloading =false ;
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(child: Text(
-                              'Ajouter image',
+                              'modifier ',
                               style: GoogleFonts.robotoCondensed(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

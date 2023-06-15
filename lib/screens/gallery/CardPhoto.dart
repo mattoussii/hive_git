@@ -27,6 +27,7 @@ class CardPhoto extends StatelessWidget {
                 child: Column(
                   
                   children: [
+                    SizedBox(height: 10,),
                       Image.network(
                       '$linkImageRoot/${photomodel.photo}',
                       width: 300,

@@ -56,8 +56,8 @@ class historyCard extends StatelessWidget {
                         Expanded(
                           flex: 2,
                           child: ListTile(
-                          title: Text('${visiteModel.visiteTitle}'),
-                          subtitle: Text('${visiteModel.visiteDate}'),
+                          title: Text('${visiteModel.title}'),
+                          subtitle: Text('${visiteModel.date}'),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

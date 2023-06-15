@@ -84,9 +84,11 @@ class _rucheScreenState extends State<rucheScreen>{
                   )
                 ),
               ),
+              
 
                 ListView(
                   children: [
+                    SizedBox(height: 80,),
 
                     FutureBuilder(
                       future:   getRuche(),
@@ -187,8 +189,8 @@ class _rucheScreenState extends State<rucheScreen>{
                                   ],
                                 ) 
                            ) ;
-                    })
-                  
+                    }),
+                    SizedBox(height: 80,),
                   ],
                 ),
               ],

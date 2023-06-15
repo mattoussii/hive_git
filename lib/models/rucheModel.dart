@@ -9,7 +9,7 @@ class RucheModel {
   String? rucheImage;
   int? userid;
 
-  static var rucheid;
+
 
 
 

@@ -8,7 +8,7 @@ import 'package:firebase_auth_app/screens/ruche/ruche.dart';
 import 'package:firebase_auth_app/screens/visite/visite.dart';
 import 'package:firebase_auth_app/screens/historique/history.dart';
 import 'package:firebase_auth_app/screens/scanner_screen/scanner.dart';
-import 'package:firebase_auth_app/shop/shop_screens_body/shop_home_screen.dart';
+import 'package:firebase_auth_app/screens/shop/shop_screens_body/shop_home_screen.dart';
 import 'package:firebase_auth_app/screens/gallery/gallery.dart';
 import 'package:firebase_auth_app/screens/help.dart';
 import 'package:flutter/material.dart';

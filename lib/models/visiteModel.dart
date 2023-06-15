@@ -2,27 +2,27 @@
 
 class VisiteModel {
   int? visiteId;
-  String? visiteTitle;
-  String? visiteContent;
-  String? visiteDate;
-  String? visiteImage;
-  int? visiteRuche;
+  String? title;
+  String? content;
+  String? date;
+  String? rucheid;
+  int? imagename;
 
   VisiteModel(
       {this.visiteId,
-      this.visiteTitle,
-      this.visiteContent,
-      this.visiteDate,
-      this.visiteImage,
-      this.visiteRuche});
+      this.title,
+      this.content,
+      this.date,
+      this.rucheid,
+      this.imagename});
 
   VisiteModel.fromJson(Map<String, dynamic> json) {
     visiteId = json['visite_id'];
-    visiteTitle = json['visite_title'];
-    visiteContent = json['visite_content'];
-    visiteDate = json['visite_date'];
-    visiteImage = json['visite_image'];
-    visiteRuche = json['visite_ruche'];
+    title = json['visite_title'];
+    content = json['visite_content'];
+    date = json['visite_date'];
+    rucheid = json['visite_ruche'];
+    imagename = json['visite_image'];
   }
 
 
