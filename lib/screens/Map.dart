@@ -182,6 +182,7 @@ class _Map_screenState extends State<Map_screen> {
                 padding: const EdgeInsets.only(top: 8, bottom: 8),
                 child: Row(
                   children: <Widget>[
+                   
                     Card(
                       color: kBackgroundColor,
                       child: MaterialButton(
@@ -201,6 +202,8 @@ class _Map_screenState extends State<Map_screen> {
                         },
                         child: const Text('Fit Bounds'),
                       ),
+
+                      
                     ),
                     Builder(builder: (BuildContext context) {
                       return Card(

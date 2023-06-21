@@ -4,8 +4,8 @@ import 'package:firebase_auth_app/constants.dart';
 import 'package:firebase_auth_app/crud.dart';
 import 'package:firebase_auth_app/main.dart';
 import 'package:firebase_auth_app/models/visiteModel.dart';
-import 'package:firebase_auth_app/screens/historique/history_card.dart';
 import 'package:firebase_auth_app/screens/visite/edit.dart';
+import 'package:firebase_auth_app/screens/visite/visiteCard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -92,7 +92,7 @@ class _HistoryScreenState extends State<HistoryScreen>{
                       shrinkWrap: true ,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context , i){
-                      return historyCard(
+                      return visiteCard(
                         onDelete: () async {  },
                         onTap: (){
                           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
@@ -120,7 +120,7 @@ class _HistoryScreenState extends State<HistoryScreen>{
                                 ),
                                   SizedBox(height: 30,),
                                 Text(
-                                    "chargement ..." ,
+                                    "il n'y a pas de historique" ,
                                   style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold ,
@@ -159,7 +159,7 @@ class _HistoryScreenState extends State<HistoryScreen>{
 
   class DataSearch extends SearchDelegate {
     List names =[
-      'ruche 1', 'ruche 2', 'ruche 3',
+      'ruche 1', 'ruche 2', 'ruche 3' ,'ruche 4', 'ruche 5', 'ruche 6',
     ];
   @override
   List<Widget>? buildActions(BuildContext context) {

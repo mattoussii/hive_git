@@ -1,12 +1,14 @@
 // ignore_for_file: file_names, camel_case_types, unnecessary_this
 
+
 class VisiteModel {
   int? visiteId;
   String? title;
   String? content;
   String? date;
-  String? rucheid;
-  int? imagename;
+  String? imagename;
+  int? rucheid;
+  
 
   VisiteModel(
       {this.visiteId,
@@ -21,8 +23,8 @@ class VisiteModel {
     title = json['visite_title'];
     content = json['visite_content'];
     date = json['visite_date'];
-    rucheid = json['visite_ruche'];
     imagename = json['visite_image'];
+    rucheid = json['visite_ruche'];
   }
 
 

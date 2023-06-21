@@ -21,36 +21,7 @@ class add extends StatefulWidget {
 
 class _addState extends State<add>  {
 
-   //Position? cl ;
-  // Future getPositon() async {
-  //   bool services ;
-  //   LocationPermission per ;
-  //    services = await Geolocator.isLocationServiceEnabled() ;
-  //    if(services == false){
-  //     AwesomeDialog(
-  //       context: context ,
-  //       title: "services",
-  //       body: 
-  //       Text('services not enable',
-  //                style: GoogleFonts.robotoCondensed(
-  //                   fontSize: 20,fontWeight: FontWeight.normal, color: Colors.black,
-  //                 ),                
-  //             ),
-  //       btnOkOnPress: () {},    
-  //       ).show();}
-  //   per = await Geolocator.checkPermission() ;
-  //   if( per == LocationPermission.denied) {
-  //     per = await Geolocator.requestPermission() ;
-  //     if(per == LocationPermission.always ){
-  //       getLatAndLong();
-  //     }
-  //   }
-  // }
-  // Future<Position> getLatAndLong() async {
-  //   return await Geolocator.getCurrentPosition().then((value) =>  value);
-  // }
   
-
 
 
 Crud _crud = Crud() ;
@@ -61,7 +32,7 @@ GlobalKey<FormState> formState =GlobalKey() ;
 final TextEditingController content  = TextEditingController() ;
 final TextEditingController title = TextEditingController() ;
 final TextEditingController date = TextEditingController() ;
-final TextEditingController ruche = TextEditingController() ;
+final TextEditingController rucheid = TextEditingController() ;
 
 bool isloading =false ;
 
@@ -90,13 +61,13 @@ bool isloading =false ;
     "title"   :title.text,
     "content" : content.text ,
     "date"    : date.text ,
-    "rucheid" : ruche.text ,
+    "rucheid" : rucheid.text,
   }, myfile! );
     isloading = false ;
     setState(() {  
     });
   if(response["status"] == "success"){
-    Navigator.of(context).pushReplacementNamed('visite');
+    Navigator.of(context).pushReplacementNamed('home');
   }else{ 
   }
   }
@@ -105,7 +76,7 @@ bool isloading =false ;
   
   @override
   Widget build(BuildContext context) {    
-    var time = DateTime.now() ;
+    
     return Scaffold(
       appBar: AppBar(
         
@@ -225,7 +196,7 @@ bool isloading =false ;
                         }
                         return null ;
                       },
-                    controller: ruche,
+                    controller: rucheid,
                       decoration: InputDecoration(
                     filled: true,
                     fillColor: kBackgroundColor,
@@ -234,13 +205,10 @@ bool isloading =false ;
                     prefixIcon: Icon(Icons.note_add , color:  Colors.green,)
                   ),
                   ),
+                  
                  
-                  //add image and show location
-                  // ElevatedButton(
-                  //    child:  Text('add image for note'),
-                  //    onPressed: (){ showButtomSheet();}, ),                
-                  // Center(child: _file == null ? const Text('image not selected') : Image.file(_file!),),                                                        
-                //                
+                                                 
+                              
                   //location(get latitude and longitude) button                            
                 //   ElevatedButton(onPressed: () async {
                 //     cl = await getLatAndLong()  ;

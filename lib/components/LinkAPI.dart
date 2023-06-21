@@ -5,10 +5,10 @@
 //-->  port  9999
 //--> enable make physique device request
 
-const String linkServerName = "http://192.168.1.5:9999/app_php";
+const String linkServerName = "http://192.168.201.168:9999/app_php";
 
 
-const String linkImageRoot= "http://192.168.1.5:9999/app_php/upload";
+const String linkImageRoot = "http://192.168.201.168:9999/app_php/upload";
 
 
 

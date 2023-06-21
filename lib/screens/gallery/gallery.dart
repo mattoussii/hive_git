@@ -61,7 +61,7 @@ class _GalleryState extends State<Gallery> {
            onPressed: (){
             Navigator.of(context).pushNamed('addp');
            }),
-      backgroundColor: Color.fromARGB(255, 188, 185, 185),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: 
      Container(
       

@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                     title: const Text('ruche'),
                     leading:  Icon(
-                                  Icons.check
+                                  Icons.hive_rounded , 
                                 ),
                     onTap: () {
                         Navigator.pop(context);

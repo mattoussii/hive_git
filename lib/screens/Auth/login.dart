@@ -81,7 +81,28 @@ if(response["status"] == "success"){
           
           child: Center(
             child: isloading == true ?
-            Center(child: CircularProgressIndicator())
+             Center(
+                child: 
+                    Column(
+                  children: [
+              SizedBox(height: 150,),
+              Center(
+                child: Image.asset(
+                  'images/bee.png',
+                  height: 200,
+                  width: 200,),
+              ),
+                SizedBox(height: 30,),
+                                Text(
+                                    "chargement ..." ,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.green ,
+                                    fontWeight: FontWeight.bold
+                                  ), )
+            ],
+          ) ,
+      ) 
              :ListView(
               children: [
                 Form(

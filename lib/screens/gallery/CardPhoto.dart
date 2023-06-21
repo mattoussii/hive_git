@@ -1,5 +1,5 @@
 
-// ignore_for_file: prefer_const_constructors, file_names, unnecessary_string_interpolations
+// ignore_for_file: prefer_const_constructors, file_names, unnecessary_string_interpolations, unused_import
 
 import 'package:firebase_auth_app/components/LinkAPI.dart';
 import 'package:firebase_auth_app/constants.dart';
@@ -22,7 +22,7 @@ class CardPhoto extends StatelessWidget {
     return    InkWell(
       onTap: ontap,
       child: Card(
-        color: kBackgroundColor,
+        color: Colors.white70,
               child: Center(
                 child: Column(
                   
